@@ -1,44 +1,55 @@
-[![Build Status](https://travis-ci.org/clearidea/neuron.svg?branch=master)](https://travis-ci.org/clearidea/neuron)
-
 # About Neuron PHP
 
-Neuron is a PHP utility library. Although, it contains a basic
-application class for CLI and Web, the goal of this project is in
-no way to become a framework.
+## Validation
 
-## Data
+### ArrayData
 
-### Filtering
+### Boolean
 
-### Validation
- 
-## Logging
+### Currency
 
-A fairly full featured logging mechanism that supports many formats
-and destinations.
+### Date
 
-## Settings
+### DateRange
 
-## Parsers
+### DateTime
 
-## Patterns
+### DateWithinRange
 
-### Criteria
-Implementation of the Criteria pattern including And, Or and Not.
+### Ein
 
-### Observer
+### Email
 
-### Registry
+### FloatingPoint
 
-### Singleton
+### Integer
 
-## Applications
+### IPAddress
 
-### Generic Application
+### Name
 
-### Commandline Application
+### NotEmpty
 
-## Versioning
+### NotNull
 
-The Version data object is design to couple with the [Bump](https://github.com/ljonesfl/bump)
-utility to reference version information.
+### NumberWithinRange
+
+### Numeric
+
+### NumericRange
+
+### PhoneNumber
+
+### Policy
+
+### Positive
+
+### StringData (String)
+
+### StringLength
+
+### Time
+
+### Upc
+
+### Url
