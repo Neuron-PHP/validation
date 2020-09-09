@@ -26,6 +26,8 @@
 
 ### IPAddress
 
+### Json
+
 ### Name
 
 ### NotEmpty
