@@ -1,4 +1,5 @@
-## 0.5.3
+## 0.5.3 2022-04-04
+* Scheduled release
 
 ## 0.5.2 2020-09-09
 * Added the Json validator.

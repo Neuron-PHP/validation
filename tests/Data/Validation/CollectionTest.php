@@ -4,7 +4,7 @@ class CollectionTest extends PHPUnit\Framework\TestCase
 {
 	public $Collection;
 
-	public function setUp()
+	public function setUp() : void
 	{
 		parent::setUp();
 

@@ -4,7 +4,7 @@ class PolicyTest extends PHPUnit\Framework\TestCase
 {
 	private $PolicyTraitObj;
 
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->PolicyTraitObj = $this->getObjectForTrait( '\Neuron\Data\Validation\Policy' );
 
