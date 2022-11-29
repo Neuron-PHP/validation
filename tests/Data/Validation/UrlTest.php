@@ -7,7 +7,7 @@
  * Time: 11:07 AM
  */
 
-class UrlTest1
+class UrlTest
 	extends PHPUnit\Framework\TestCase
 {
 	public function testFail1()
