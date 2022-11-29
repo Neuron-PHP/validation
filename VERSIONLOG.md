@@ -1,3 +1,6 @@
+## 0.6.0 2022-11-29
+* Scheduled release
+
 ## 0.5.3 2022-04-04
 * Scheduled release
 
