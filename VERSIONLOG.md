@@ -1,4 +1,6 @@
 ## 0.6.3
+* Updated the directory structure.
+* Added a bool return type to the base validate method.
 
 ## 0.6.1
 
