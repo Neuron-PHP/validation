@@ -11,7 +11,7 @@ class DateTest
 {
 	public function testFail()
 	{
-		$dn = new \Neuron\Data\Validation\Date();
+		$dn = new \Neuron\Validation\Date();
 
 		$dn->setFormat( 'Y-m-d' );
 
@@ -20,7 +20,7 @@ class DateTest
 
 	public function testPass()
 	{
-		$dn = new \Neuron\Data\Validation\Date();
+		$dn = new \Neuron\Validation\Date();
 
 		$dn->setFormat( 'Y-m-d' );
 

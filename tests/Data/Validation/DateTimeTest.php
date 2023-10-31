@@ -10,7 +10,7 @@ class DateTimeTest extends PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{
-		$dn = new \Neuron\Data\Validation\DateTime();
+		$dn = new \Neuron\Validation\DateTime();
 
 		$dn->setFormat( 'Y-m-d H:i:s' );
 
@@ -19,7 +19,7 @@ class DateTimeTest extends PHPUnit\Framework\TestCase
 
 	public function testPass()
 	{
-		$dn = new \Neuron\Data\Validation\DateTime();
+		$dn = new \Neuron\Validation\DateTime();
 
 		$dn->setFormat( 'Y-m-d H:i:s' );
 

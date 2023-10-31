@@ -11,7 +11,7 @@ class DateWithinRangeTest extends PHPUnit\Framework\TestCase
 
 	public function testWithinRangeFail()
 	{
-		$Validator = new \Neuron\Data\Validation\DateWithinRange();
+		$Validator = new \Neuron\Validation\DateWithinRange();
 
 		$Validator->setFormat( 'Y-m-d' );
 		$Validator->setRange( new \Neuron\Data\Object\DateRange( '2000-01-01', '2000-01-02') );
@@ -21,7 +21,7 @@ class DateWithinRangeTest extends PHPUnit\Framework\TestCase
 
 	public function testWithinRangePass()
 	{
-		$Validator = new \Neuron\Data\Validation\DateWithinRange();
+		$Validator = new \Neuron\Validation\DateWithinRange();
 
 		$Validator->setFormat( 'Y-m-d' );
 		$Validator->setRange( new \Neuron\Data\Object\DateRange( '2000-01-01', '2020-01-02' ) );

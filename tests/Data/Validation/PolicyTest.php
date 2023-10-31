@@ -6,9 +6,9 @@ class PolicyTest extends PHPUnit\Framework\TestCase
 
 	public function setUp() : void
 	{
-		$this->PolicyTraitObj = $this->getObjectForTrait( '\Neuron\Data\Validation\Policy' );
+		$this->PolicyTraitObj = $this->getObjectForTrait( '\Neuron\Validation\Policy' );
 
-		$DateRange = new \Neuron\Data\Validation\DateWithinRange();
+		$DateRange = new \Neuron\Validation\DateWithinRange();
 
 		$DateRange->setFormat( 'Y-m-d' )
 			->setRange( new \Neuron\Data\Object\DateRange( '2000-01-01', '2020-01-02') );
@@ -18,10 +18,10 @@ class PolicyTest extends PHPUnit\Framework\TestCase
 			$DateRange
 		);
 
-		$PositiveCurrency = new \Neuron\Data\Validation\Collection();
+		$PositiveCurrency = new \Neuron\Validation\Collection();
 
-		$PositiveCurrency->add( 'Positive', new \Neuron\Data\Validation\Positive() );
-		$PositiveCurrency->add( 'Currency', new \Neuron\Data\Validation\Currency() );
+		$PositiveCurrency->add( 'Positive', new \Neuron\Validation\Positive() );
+		$PositiveCurrency->add( 'Currency', new \Neuron\Validation\Currency() );
 
 		$this->PolicyTraitObj->addRule( 'PositiveCurrency', $PositiveCurrency );
 	}

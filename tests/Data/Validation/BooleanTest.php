@@ -4,21 +4,21 @@ class BooleanTest extends PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{
-		$Validator = new \Neuron\Data\Validation\Boolean();
+		$Validator = new \Neuron\Validation\Boolean();
 
 		$this->assertFalse( $Validator->isValid( 'string' ) );
 	}
 
 	public function testPass()
 	{
-		$Validator = new \Neuron\Data\Validation\Boolean();
+		$Validator = new \Neuron\Validation\Boolean();
 
 		$this->assertTrue( $Validator->isValid( true ) );
 	}
 
 	public function testLoose()
 	{
-		$Validator = new \Neuron\Data\Validation\Boolean( true );
+		$Validator = new \Neuron\Validation\Boolean( true );
 
 		$this->assertTrue( $Validator->isValid( 0 ) );
 		$this->assertTrue( $Validator->isValid( 1 ) );

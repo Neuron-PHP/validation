@@ -1,6 +1,6 @@
 <?php
 
-use Neuron\Data\Validation\Numeric;
+use Neuron\Validation\Numeric;
 
 class NumericTest extends PHPUnit\Framework\TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-use Neuron\Data\Validation\StringLength;
+use Neuron\Validation\StringLength;
 use PHPUnit\Framework\TestCase;
 
 class StringLengthTest extends TestCase

@@ -12,14 +12,14 @@ class EmailTest
 {
 	public function testFail()
 	{
-		$dn = new \Neuron\Data\Validation\Email();
+		$dn = new \Neuron\Validation\Email();
 
 		$this->assertFalse( $dn->isValid( 'test_example.org' ) );
 	}
 
 	public function testPass()
 	{
-		$dn = new \Neuron\Data\Validation\Email();
+		$dn = new \Neuron\Validation\Email();
 
 		$this->assertTrue( $dn->isValid( 'test@example.org' ) );
 	}
