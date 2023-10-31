@@ -2,7 +2,7 @@
 
 namespace Data\Validation;
 
-use Neuron\Data\Validation\Json;
+use Neuron\Validation\Json;
 use PHPUnit\Framework\TestCase;
 
 class JsonTest extends TestCase

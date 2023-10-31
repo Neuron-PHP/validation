@@ -10,7 +10,7 @@ class NotEmptyTest extends PHPUnit\Framework\TestCase
 {
 	public function testNotEmpty()
 	{
-		$Validator = new \Neuron\Data\Validation\NotEmpty();
+		$Validator = new \Neuron\Validation\NotEmpty();
 
 		$this->assertTrue( $Validator->isValid( 'test' ) );
 		$this->assertFalse( $Validator->isValid( '' ) );

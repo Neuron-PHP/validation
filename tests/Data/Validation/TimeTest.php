@@ -6,13 +6,11 @@
  * Time: 9:16 AM
  */
 
-use Neuron\Data\Validation;
-
 class TimeTest extends PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{
-		$dn = new Validation\Time();
+		$dn = new \Neuron\Validation\Time();
 
 		$dn->setFormat( 'g:i:s A' );
 
@@ -21,7 +19,7 @@ class TimeTest extends PHPUnit\Framework\TestCase
 
 	public function testPass()
 	{
-		$dn = new Validation\Time();
+		$dn = new \Neuron\Validation\Time();
 
 		$dn->setFormat( 'g:i:s A' );
 

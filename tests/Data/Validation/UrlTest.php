@@ -12,14 +12,14 @@ class UrlTest
 {
 	public function testFail1()
 	{
-		$dn = new \Neuron\Data\Validation\Url();
+		$dn = new \Neuron\Validation\Url();
 
 		$this->assertFalse( $dn->isValid( 'this is a test' ) );
 	}
 
 	public function testPass()
 	{
-		$dn = new \Neuron\Data\Validation\Url();
+		$dn = new \Neuron\Validation\Url();
 
 		$this->assertTrue( $dn->isValid( 'http://example.org' ) );
 	}

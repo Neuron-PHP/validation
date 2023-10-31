@@ -12,14 +12,14 @@ class IPAddressTest
 {
 	public function testFail()
 	{
-		$dn = new \Neuron\Data\Validation\IPAddress();
+		$dn = new \Neuron\Validation\IPAddress();
 
 		$this->assertFalse( $dn->isValid( 'example.org' ) );
 	}
 
 	public function testPass()
 	{
-		$dn = new \Neuron\Data\Validation\IPAddress();
+		$dn = new \Neuron\Validation\IPAddress();
 
 		$this->assertTrue( $dn->isValid( '192.168.1.1' ) );
 	}

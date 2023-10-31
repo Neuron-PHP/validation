@@ -1,12 +1,10 @@
 <?php
 
-use Neuron\Data\Validation\NumericRange;
-
 class NumberWithinRangeTest extends PHPUnit\Framework\TestCase
 {
 	public function testRangePass()
 	{
-		$Validator = new \Neuron\Data\Validation\NumberWithinRange();
+		$Validator = new \Neuron\Validation\NumberWithinRange();
 
 		$Validator->setRange(
 			new \Neuron\Data\Object\NumericRange( 1, 10 )
@@ -19,7 +17,7 @@ class NumberWithinRangeTest extends PHPUnit\Framework\TestCase
 
 	public function testRangeFail()
 	{
-		$Validator = new \Neuron\Data\Validation\NumberWithinRange();
+		$Validator = new \Neuron\Validation\NumberWithinRange();
 
 		$Validator->setRange(
 			new \Neuron\Data\Object\NumericRange( 1, 10 )

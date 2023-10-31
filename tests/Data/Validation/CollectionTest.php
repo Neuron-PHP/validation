@@ -8,10 +8,10 @@ class CollectionTest extends PHPUnit\Framework\TestCase
 	{
 		parent::setUp();
 
-		$this->Collection = new \Neuron\Data\Validation\Collection();
+		$this->Collection = new \Neuron\Validation\Collection();
 
-		$this->Collection->add( 'Positive', new \Neuron\Data\Validation\Positive() );
-		$this->Collection->add( 'Int', new \Neuron\Data\Validation\Integer() );
+		$this->Collection->add( 'Positive', new \Neuron\Validation\Positive() );
+		$this->Collection->add( 'Int', new \Neuron\Validation\Integer() );
 
 	}
 

@@ -1,12 +1,10 @@
 <?php
 
-use Neuron\Data\Validation\NumericRange;
-
 class NumericRangeTest extends PHPUnit\Framework\TestCase
 {
 	public function testRangePass()
 	{
-		$Validator = new \Neuron\Data\Validation\NumericRange();
+		$Validator = new \Neuron\Validation\NumericRange();
 
 		$this->assertTrue(
 			$Validator->isValid(
@@ -17,7 +15,7 @@ class NumericRangeTest extends PHPUnit\Framework\TestCase
 
 	public function testRangeFail()
 	{
-		$Validator = new \Neuron\Data\Validation\NumericRange();
+		$Validator = new \Neuron\Validation\NumericRange();
 
 		$this->assertFalse(
 			$Validator->isValid(
