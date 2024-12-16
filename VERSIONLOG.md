@@ -1,3 +1,5 @@
+## 0.6.6
+
 ## 0.6.5 2024-12-16
 * Added namespaces to the tests.
 
