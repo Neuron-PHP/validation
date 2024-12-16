@@ -8,6 +8,9 @@
 
 namespace Neuron\Validation;
 
+/**
+ * Validation collection.
+ */
 interface ICollection extends IValidator
 {
 	/**
