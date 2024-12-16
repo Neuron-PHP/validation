@@ -1,4 +1,4 @@
-## 0.6.3 2024-12-16
+## 0.6.4 2024-12-16
 * Updated the directory structure.
 * Added a bool return type to the base validate method.
 
