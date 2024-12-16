@@ -1,4 +1,5 @@
 <?php
+namespace Tests\Data\Validation;
 
 /**
  * Created by PhpStorm.
@@ -6,7 +7,7 @@
  * Date: 8/3/16
  * Time: 11:11 AM
  */
-class NotEmptyTest extends PHPUnit\Framework\TestCase
+class NotEmptyTest extends \PHPUnit\Framework\TestCase
 {
 	public function testNotEmpty()
 	{

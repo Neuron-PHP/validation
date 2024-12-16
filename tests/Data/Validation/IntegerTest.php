@@ -1,6 +1,7 @@
 <?php
+namespace Tests\Data\Validation;
 
-class IntegerTest extends PHPUnit\Framework\TestCase
+class IntegerTest extends \PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{

@@ -1,4 +1,5 @@
 <?php
+namespace Tests\Data\Validation;
 
 /**
  * Created by PhpStorm.
@@ -8,7 +9,7 @@
  */
 
 class UrlTest
-	extends PHPUnit\Framework\TestCase
+	extends \PHPUnit\Framework\TestCase
 {
 	public function testFail1()
 	{

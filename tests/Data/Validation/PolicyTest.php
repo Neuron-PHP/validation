@@ -1,6 +1,7 @@
 <?php
+namespace Tests\Data\Validation;
 
-class PolicyTest extends PHPUnit\Framework\TestCase
+class PolicyTest extends \PHPUnit\Framework\TestCase
 {
 	private $PolicyTraitObj;
 

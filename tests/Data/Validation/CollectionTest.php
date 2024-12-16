@@ -1,6 +1,7 @@
 <?php
+namespace Tests\Data\Validation;
 
-class CollectionTest extends PHPUnit\Framework\TestCase
+class CollectionTest extends \PHPUnit\Framework\TestCase
 {
 	public $Collection;
 

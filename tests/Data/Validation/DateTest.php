@@ -1,4 +1,5 @@
 <?php
+namespace Tests\Data\Validation;
 
 /**
  * Created by PhpStorm.
@@ -7,7 +8,7 @@
  * Time: 11:07 AM
  */
 class DateTest
-	extends PHPUnit\Framework\TestCase
+	extends \PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{

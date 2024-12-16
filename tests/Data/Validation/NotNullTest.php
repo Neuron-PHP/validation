@@ -1,6 +1,7 @@
 <?php
+namespace Tests\Data\Validation;
 
-class NotNullTest extends PHPUnit\Framework\TestCase
+class NotNullTest extends \PHPUnit\Framework\TestCase
 {
 	public function testNotNull()
 	{

@@ -1,5 +1,7 @@
 <?php
-class StringTest extends PHPUnit\Framework\TestCase
+namespace Tests\Data\Validation;
+
+class StringTest extends \PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{

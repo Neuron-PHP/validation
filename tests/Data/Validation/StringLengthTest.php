@@ -1,4 +1,5 @@
 <?php
+namespace Tests\Data\Validation;
 
 use Neuron\Validation\StringLength;
 use PHPUnit\Framework\TestCase;

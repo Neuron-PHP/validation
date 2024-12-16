@@ -1,6 +1,7 @@
 <?php
+namespace Tests\Data\Validation;
 
-class FloatTest extends PHPUnit\Framework\TestCase
+class FloatTest extends \PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{
