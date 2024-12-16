@@ -1,4 +1,5 @@
-## 0.6.5
+## 0.6.5 2024-12-16
+* Added namespaces to the tests.
 
 ## 0.6.4 2024-12-16
 * Updated the directory structure.
