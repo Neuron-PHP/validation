@@ -1,8 +1,9 @@
 <?php
+namespace Tests\Data\Validation;
 
 use Neuron\Validation\Numeric;
 
-class NumericTest extends PHPUnit\Framework\TestCase
+class NumericTest extends \PHPUnit\Framework\TestCase
 {
 	protected $_Validator;
 	

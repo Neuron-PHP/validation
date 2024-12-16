@@ -1,6 +1,6 @@
 <?php
-
-class ArrayTest extends PHPUnit\Framework\TestCase
+namespace Tests\Data\Validation;
+class ArrayTest extends \PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{

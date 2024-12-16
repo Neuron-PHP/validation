@@ -1,6 +1,7 @@
 <?php
+namespace Tests\Data\Validation;
 
-class CurrencyTest extends PHPUnit\Framework\TestCase
+class CurrencyTest extends \PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{

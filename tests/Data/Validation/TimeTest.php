@@ -1,4 +1,6 @@
 <?php
+namespace Tests\Data\Validation;
+
 /**
  * Created by PhpStorm.
  * User: jeremiahyoder
@@ -6,7 +8,7 @@
  * Time: 9:16 AM
  */
 
-class TimeTest extends PHPUnit\Framework\TestCase
+class TimeTest extends \PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{

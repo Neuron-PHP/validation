@@ -1,6 +1,7 @@
 <?php
+namespace Tests\Data\Validation;
 
-class NumberWithinRangeTest extends PHPUnit\Framework\TestCase
+class NumberWithinRangeTest extends \PHPUnit\Framework\TestCase
 {
 	public function testRangePass()
 	{

@@ -1,6 +1,5 @@
 <?php
-
-namespace Data\Validation;
+namespace Tests\Data\Validation;
 
 use Neuron\Validation\Json;
 use PHPUnit\Framework\TestCase;

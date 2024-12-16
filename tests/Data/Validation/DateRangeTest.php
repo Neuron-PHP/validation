@@ -1,6 +1,7 @@
 <?php
+namespace Tests\Data\Validation;
 
-class DateRangeTest extends PHPUnit\Framework\TestCase
+class DateRangeTest extends \PHPUnit\Framework\TestCase
 {
 	public function testRangeFail()
 	{

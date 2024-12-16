@@ -1,4 +1,5 @@
 <?php
+namespace Tests\Data\Validation;
 
 /**
  * Created by PhpStorm.
@@ -6,7 +7,7 @@
  * Date: 7/27/16
  * Time: 6:55 PM
  */
-class DateWithinRangeTest extends PHPUnit\Framework\TestCase
+class DateWithinRangeTest extends \PHPUnit\Framework\TestCase
 {
 
 	public function testWithinRangeFail()

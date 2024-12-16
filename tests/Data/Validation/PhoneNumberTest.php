@@ -1,6 +1,7 @@
 <?php
+namespace Tests\Data\Validation;
 
-class PhoneNumberTest extends PHPUnit\Framework\TestCase
+class PhoneNumberTest extends \PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{
