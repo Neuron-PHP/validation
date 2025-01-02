@@ -1,3 +1,5 @@
+## 0.6.7
+
 ## 0.6.6 2025-01-01
 * Added Objectdata validator.
 
