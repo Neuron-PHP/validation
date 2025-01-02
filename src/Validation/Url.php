@@ -9,6 +9,6 @@ class Url extends Base
 {
 	protected function validate( $url ) : bool
 	{
-		return filter_var( $url, FILTER_VALIDATE_URL ) ? true : false;
+		return (bool)filter_var( $url, FILTER_VALIDATE_URL );
 	}
 }

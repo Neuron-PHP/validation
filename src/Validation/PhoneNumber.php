@@ -15,6 +15,13 @@ class PhoneNumber extends Base
 
 	public $_Type;
 
+	public function __construct( int $Type = self::US )
+	{
+		$this->_Type = $Type;
+
+		return parent::__construct();
+	}
+
 	/**
 	 * @return int
 	 */
@@ -33,20 +40,13 @@ class PhoneNumber extends Base
 		return $this;
 	}
 
-	public function __construct()
-	{
-		$this->_Type = self::US;
-
-		return parent::__construct();
-	}
-
 	public function validate( $data ) : bool
 	{
 		if( $this->getType() == self::INTERNATIONAL )
 		{
-			return preg_match(self::INTERNATIONAL_PATTERN, $data ) == 1 ? true : false;
+			return preg_match( self::INTERNATIONAL_PATTERN, $data ) == 1;
 		}
 
-		return preg_match(self::US_PATTERN, $data ) == 1 ? true : false;
+		return preg_match( self::US_PATTERN, $data ) == 1;
 	}
 }

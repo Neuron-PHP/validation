@@ -1,5 +1,6 @@
+## 0.6.8
+* Updated phone number validation to specify the type in the constructor.
 ## 0.6.7
-
 ## 0.6.6 2025-01-01
 * Added Objectdata validator.
 
