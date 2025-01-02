@@ -7,20 +7,20 @@ namespace Neuron\Validation;
  */
 class Time extends Base
 {
-	private $_sFormat = 'g:i:s A';
+	private string $_Format = 'g:i:s A';
 
 	protected function validate( $CheckTime ) : bool
 	{
-		$Time = \DateTime::createFromFormat( $this->_sFormat, $CheckTime );
-		return $Time && $Time->format( $this->_sFormat ) == $CheckTime;
+		$Time = \DateTime::createFromFormat( $this->_Format, $CheckTime );
+		return $Time && $Time->format( $this->_Format ) == $CheckTime;
 	}
 
 	/**
 	 * @param $sFormat - Specify the date format to validate to. Defaults to g:i:s A
 	 */
 
-	public function setFormat( $sFormat )
+	public function setFormat( $Format ): void
 	{
-		$this->_sFormat = $sFormat;
+		$this->_Format = $Format;
 	}
 }
