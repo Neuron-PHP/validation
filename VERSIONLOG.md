@@ -1,3 +1,6 @@
+## 0.6.6 2025-01-01
+* Added Objectdata validator.
+
 ## 0.6.5 2024-12-16
 * Added namespaces to the tests.
 

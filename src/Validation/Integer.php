@@ -14,6 +14,6 @@ class Integer extends Base
 			return true;
 		}
 
-		return ctype_digit( $integer );
+		return false;
 	}
 }
