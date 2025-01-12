@@ -1,3 +1,7 @@
+## 0.6.10
+
+## 0.6.9
+
 ## 0.6.8
 * Updated phone number validation to specify the type in the constructor.
 ## 0.6.7
