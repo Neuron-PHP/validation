@@ -1,4 +1,4 @@
-## 0.6.11
+## 0.6.11 2025-01-21
 * Upgraded Collection.
 * Tests now at 100% coverage.
 
