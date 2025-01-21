@@ -1,7 +1,7 @@
 ## 0.6.15
+* Added RegExPattern validation.
 
 ## 0.6.14 2025-01-21
-
 ## 0.6.13 2025-01-21
 * Updated StringLength to support ranges.
 
