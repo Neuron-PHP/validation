@@ -27,5 +27,12 @@ class JsonTest extends TestCase
 				'invalidjson'
 			)
 		);
+
+		$this->assertFalse(
+			$Json->isValid(
+				1
+			)
+		);
+
 	}
 }

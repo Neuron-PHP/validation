@@ -1,11 +1,14 @@
 <?php
 namespace Tests\Data\Validation;
 
-class DateRangeTest extends \PHPUnit\Framework\TestCase
+use Neuron\Validation\DateRange;
+use PHPUnit\Framework\TestCase;
+
+class DateRangeTest extends TestCase
 {
 	public function testRangeFail()
 	{
-		$Validator = new \Neuron\Validation\DateRange();
+		$Validator = new DateRange();
 
 		$Validator->setFormat( 'Y-m-d' );
 
@@ -18,7 +21,7 @@ class DateRangeTest extends \PHPUnit\Framework\TestCase
 
 	public function testRangePass()
 	{
-		$Validator = new \Neuron\Validation\DateRange();
+		$Validator = new DateRange();
 
 		$Validator->setFormat( 'Y-m-d' );
 
