@@ -1,4 +1,4 @@
-## 0.6.13
+## 0.6.13 2025-01-21
 * Updated StringLength to support ranges.
 
 ## 0.6.12 2025-01-21
