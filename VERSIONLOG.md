@@ -1,4 +1,4 @@
-## 0.6.15
+## 0.6.15 2025-01-21
 * Added RegExPattern validation.
 
 ## 0.6.14 2025-01-21
