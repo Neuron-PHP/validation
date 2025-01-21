@@ -1,4 +1,6 @@
--e ## 0.6.11
+## 0.6.11
+* Upgraded Collection.
+* Tests now at 100% coverage.
 
 ## 0.6.10
 
