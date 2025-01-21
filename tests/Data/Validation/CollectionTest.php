@@ -63,7 +63,9 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
 
 	public function testRemove()
 	{
-		$this->assertFalse( $this->Collection->remove( 'Monkey' ) );
+		$Collection = new Collection();
+
+		$this->assertFalse( $Collection->remove( 'Monkey' ) );
 
 		$this->assertTrue( $this->Collection->remove( 'Positive' ) );
 

@@ -7,7 +7,7 @@ namespace Neuron\Validation;
  */
 class Collection extends Base implements ICollection
 {
-	private $_Validators;
+	private array $_Validators = [];
 	private $_Failed;
 
 	protected function validate( $Data ) : bool
