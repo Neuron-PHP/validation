@@ -9,14 +9,14 @@ use Neuron\Data;
  */
 class NumberWithinRange extends Base
 {
-	private $_Range;
+	private Data\Object\NumericRange $_Range;
 
 	protected function validate( $data ) : bool
 	{
 		return ( ( $data >= $this->_Range->Minimum ) && ( $data <= $this->_Range->Maximum ) );
 	}
 
-	public function setRange( Data\Object\NumericRange $Range )
+	public function setRange( Data\Object\NumericRange $Range ): static
 	{
 		$this->_Range = $Range;
 
