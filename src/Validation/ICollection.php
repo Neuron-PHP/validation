@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: lee
  * Date: 6/24/18
- * Time: 7:39 AM
+ * IsTime: 7:39 AM
  */
 
 namespace Neuron\Validation;

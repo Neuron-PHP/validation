@@ -5,7 +5,7 @@ class NotNullTest extends \PHPUnit\Framework\TestCase
 {
 	public function testNotNull()
 	{
-		$Validator = new \Neuron\Validation\NotNull();
+		$Validator = new \Neuron\Validation\IsNotNull();
 
 		$this->assertTrue( $Validator->isValid( 'test' ) );
 		$this->assertTrue( $Validator->isValid( '' ) );

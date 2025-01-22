@@ -4,16 +4,26 @@ namespace Neuron\Validation;
 
 trait Policy
 {
-	private $_Rules;
+	private array $_Rules;
 
-	public function addRule( $Name, IValidator $Validator )
+	/**
+	 * @param $Name
+	 * @param IValidator $Validator
+	 * @return static
+	 */
+	public function addRule( $Name, IValidator $Validator ) : static
 	{
 		$this->_Rules[ $Name ] = $Validator;
 
 		return $this;
 	}
 
-	public function isRuleValid( $Name, $Value )
+	/**
+	 * @param $Name
+	 * @param $Value
+	 * @return mixed
+	 */
+	public function isRuleValid( $Name, $Value ) : bool
 	{
 		return $this->_Rules[ $Name ]->isValid( $Value );
 	}

@@ -1,4 +1,5 @@
-## 0.6.16
+## 0.7.00
+* Major refactoring. Renamed all of the validators.
 
 ## 0.6.15 2025-01-21
 * Added RegExPattern validation.

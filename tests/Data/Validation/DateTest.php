@@ -5,14 +5,14 @@ namespace Tests\Data\Validation;
  * Created by PhpStorm.
  * User: lee
  * Date: 9/5/15
- * Time: 11:07 AM
+ * IsTime: 11:07 AM
  */
 class DateTest
 	extends \PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{
-		$dn = new \Neuron\Validation\Date();
+		$dn = new \Neuron\Validation\IsDate();
 
 		$dn->setFormat( 'Y-m-d' );
 
@@ -21,7 +21,7 @@ class DateTest
 
 	public function testPass()
 	{
-		$dn = new \Neuron\Validation\Date();
+		$dn = new \Neuron\Validation\IsDate();
 
 		$dn->setFormat( 'Y-m-d' );
 

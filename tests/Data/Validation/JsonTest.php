@@ -1,14 +1,14 @@
 <?php
 namespace Tests\Data\Validation;
 
-use Neuron\Validation\Json;
+use Neuron\Validation\IsJson;
 use PHPUnit\Framework\TestCase;
 
 class JsonTest extends TestCase
 {
 	public function testJson()
 	{
-		$Json = new Json();
+		$Json = new IsJson();
 
 		$this->assertTrue(
 			$Json->isValid(

@@ -5,13 +5,13 @@ namespace Tests\Data\Validation;
  * Created by PhpStorm.
  * User: lee
  * Date: 8/3/16
- * Time: 11:11 AM
+ * IsTime: 11:11 AM
  */
 class NotEmptyTest extends \PHPUnit\Framework\TestCase
 {
 	public function testNotEmpty()
 	{
-		$Validator = new \Neuron\Validation\NotEmpty();
+		$Validator = new \Neuron\Validation\IsNotEmpty();
 
 		$this->assertTrue( $Validator->isValid( 'test' ) );
 		$this->assertFalse( $Validator->isValid( '' ) );

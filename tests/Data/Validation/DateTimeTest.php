@@ -5,13 +5,13 @@ namespace Tests\Data\Validation;
  * Created by PhpStorm.
  * User: lee
  * Date: 9/5/15
- * Time: 11:07 AM
+ * IsTime: 11:07 AM
  */
 class DateTimeTest extends \PHPUnit\Framework\TestCase
 {
 	public function testFail()
 	{
-		$dn = new \Neuron\Validation\DateTime();
+		$dn = new \Neuron\Validation\IsDateTime();
 
 		$dn->setFormat( 'Y-m-d H:i:s' );
 
@@ -20,7 +20,7 @@ class DateTimeTest extends \PHPUnit\Framework\TestCase
 
 	public function testPass()
 	{
-		$dn = new \Neuron\Validation\DateTime();
+		$dn = new \Neuron\Validation\IsDateTime();
 
 		$dn->setFormat( 'Y-m-d H:i:s' );
 

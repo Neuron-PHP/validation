@@ -5,7 +5,7 @@ namespace Neuron\Validation;
 /**
  * Requires a valid phone number format nnn-nnn-nnnn
  */
-class PhoneNumber extends Base
+class IsPhoneNumber extends Base
 {
 	const US            = 10;
 	const INTERNATIONAL = 20;
@@ -32,21 +32,25 @@ class PhoneNumber extends Base
 
 	/**
 	 * @param int $Type
-	 * @return PhoneNumber
+	 * @return IsPhoneNumber
 	 */
-	public function setType( int $Type ): PhoneNumber
+	public function setType( int $Type ): IsPhoneNumber
 	{
 		$this->_Type = $Type;
 		return $this;
 	}
 
-	public function validate( $data ) : bool
+	/**
+	 * @param mixed $Value
+	 * @return bool
+	 */
+	public function validate( mixed $Value ) : bool
 	{
 		if( $this->getType() == self::INTERNATIONAL )
 		{
-			return preg_match( self::INTERNATIONAL_PATTERN, $data ) == 1;
+			return preg_match( self::INTERNATIONAL_PATTERN, $Value ) == 1;
 		}
 
-		return preg_match( self::US_PATTERN, $data ) == 1;
+		return preg_match( self::US_PATTERN, $Value ) == 1;
 	}
 }

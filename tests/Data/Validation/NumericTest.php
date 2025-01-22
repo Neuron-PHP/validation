@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Data\Validation;
 
-use Neuron\Validation\Numeric;
+use Neuron\Validation\IsNumeric;
 
 class NumericTest extends \PHPUnit\Framework\TestCase
 {
@@ -11,7 +11,7 @@ class NumericTest extends \PHPUnit\Framework\TestCase
 	{
 		parent::setUp();
 		
-		$this->_Validator = new Numeric();
+		$this->_Validator = new IsNumeric();
 	}
 
 	public function testPass()

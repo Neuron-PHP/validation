@@ -5,7 +5,7 @@ class NumericRangeTest extends \PHPUnit\Framework\TestCase
 {
 	public function testRangePass()
 	{
-		$Validator = new \Neuron\Validation\NumericRange();
+		$Validator = new \Neuron\Validation\IsNumericRange();
 
 		$this->assertTrue(
 			$Validator->isValid(
@@ -16,7 +16,7 @@ class NumericRangeTest extends \PHPUnit\Framework\TestCase
 
 	public function testRangeFail()
 	{
-		$Validator = new \Neuron\Validation\NumericRange();
+		$Validator = new \Neuron\Validation\IsNumericRange();
 
 		$this->assertFalse(
 			$Validator->isValid(
