@@ -1,4 +1,4 @@
-## 0.7.00
+## 0.7.00 2025-01-21
 * Major refactoring. Renamed all of the validators.
 
 ## 0.6.15 2025-01-21
