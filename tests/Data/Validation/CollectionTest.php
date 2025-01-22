@@ -2,8 +2,8 @@
 namespace Tests\Data\Validation;
 
 use Neuron\Validation\Collection;
-use Neuron\Validation\Integer;
-use Neuron\Validation\Positive;
+use Neuron\Validation\IsInteger;
+use Neuron\Validation\IsPositive;
 
 class CollectionTest extends \PHPUnit\Framework\TestCase
 {
@@ -15,8 +15,8 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
 
 		$this->Collection = new Collection();
 
-		$this->Collection->add( 'Positive', new Positive() );
-		$this->Collection->add( 'Int', new Integer() );
+		$this->Collection->add( 'IsPositive', new IsPositive() );
+		$this->Collection->add( 'Int', new IsInteger() );
 
 	}
 
@@ -36,13 +36,13 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
 		$this->Collection->isValid( -1 );
 
 		$this->assertTrue(
-			\Neuron\Data\ArrayHelper::contains( $this->Collection->getViolations(),'Positive' )
+			\Neuron\Data\ArrayHelper::contains( $this->Collection->getViolations(),'IsPositive' )
 		);
 
 		$this->Collection->isValid( -1.01 );
 
 		$this->assertTrue(
-			\Neuron\Data\ArrayHelper::contains( $this->Collection->getViolations(),'Positive' )
+			\Neuron\Data\ArrayHelper::contains( $this->Collection->getViolations(),'IsPositive' )
 		);
 
 		$this->assertTrue(
@@ -58,7 +58,7 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$this->assertIsObject( $this->Collection->get( 'Positive' ) );
+		$this->assertIsObject( $this->Collection->get( 'IsPositive' ) );
 	}
 
 	public function testRemove()
@@ -67,9 +67,9 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertFalse( $Collection->remove( 'Monkey' ) );
 
-		$this->assertTrue( $this->Collection->remove( 'Positive' ) );
+		$this->assertTrue( $this->Collection->remove( 'IsPositive' ) );
 
-		$this->assertNull( $this->Collection->get( 'Positive' ) );
+		$this->assertNull( $this->Collection->get( 'IsPositive' ) );
 	}
 
 }

@@ -1,6 +1,11 @@
 <?php
 namespace Tests\Data\Validation;
 
+use Neuron\Data\Object\DateRange;
+use Neuron\Validation\Collection;
+use Neuron\Validation\IsDateWithinRange;
+use Neuron\Validation\IsPositive;
+
 class PolicyTest extends \PHPUnit\Framework\TestCase
 {
 	private $PolicyTraitObj;
@@ -9,20 +14,19 @@ class PolicyTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->PolicyTraitObj = $this->getObjectForTrait( '\Neuron\Validation\Policy' );
 
-		$DateRange = new \Neuron\Validation\DateWithinRange();
+		$DateRange = new IsDateWithinRange( new DateRange( '2000-01-01', '2020-01-02') );
 
-		$DateRange->setFormat( 'Y-m-d' )
-			->setRange( new \Neuron\Data\Object\DateRange( '2000-01-01', '2020-01-02') );
+		$DateRange->setFormat( 'Y-m-d' );
 
 		$this->PolicyTraitObj->addRule(
 			'DateRule',
 			$DateRange
 		);
 
-		$PositiveCurrency = new \Neuron\Validation\Collection();
+		$PositiveCurrency = new Collection();
 
-		$PositiveCurrency->add( 'Positive', new \Neuron\Validation\Positive() );
-		$PositiveCurrency->add( 'Currency', new \Neuron\Validation\Currency() );
+		$PositiveCurrency->add( 'IsPositive', new IsPositive() );
+		$PositiveCurrency->add( 'IsCurrency', new \Neuron\Validation\IsCurrency() );
 
 		$this->PolicyTraitObj->addRule( 'PositiveCurrency', $PositiveCurrency );
 	}

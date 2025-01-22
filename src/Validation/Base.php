@@ -8,22 +8,25 @@ namespace Neuron\Validation;
 
 abstract class Base implements IValidator
 {
-	abstract protected function validate( $data ) : bool;
-
 	public function __construct()
 	{
-		return $this;
 	}
+
+	/**
+	 * Abstract method to be implemented by all validators.
+	 * @param mixed $Value
+	 * @return bool
+	 */
+	abstract protected function validate( mixed $Value ) : bool;
 
 	/**
 	 * Returns true if validation is successful
 	 *
-	 * @param $data
+	 * @param mixed $Value
 	 * @return bool
 	 */
-
-	public function isValid( $data ) : bool
+	public function isValid( mixed $Value ) : bool
 	{
-		return $this->validate( $data );
+		return $this->validate( $Value );
 	}
 }

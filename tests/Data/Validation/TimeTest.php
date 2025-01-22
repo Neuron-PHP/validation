@@ -1,18 +1,21 @@
 <?php
 namespace Tests\Data\Validation;
 
+use Neuron\Validation\IsTime;
+use PHPUnit\Framework\TestCase;
+
 /**
  * Created by PhpStorm.
  * User: jeremiahyoder
  * Date: 2/22/17
- * Time: 9:16 AM
+ * IsTime: 9:16 AM
  */
 
-class TimeTest extends \PHPUnit\Framework\TestCase
+class TimeTest extends TestCase
 {
 	public function testFail()
 	{
-		$dn = new \Neuron\Validation\Time();
+		$dn = new IsTime();
 
 		$dn->setFormat( 'g:i:s A' );
 
@@ -21,10 +24,17 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 
 	public function testPass()
 	{
-		$dn = new \Neuron\Validation\Time();
+		$dn = new IsTime();
 
 		$dn->setFormat( 'g:i:s A' );
 
 		$this->assertTrue( $dn->isValid( '1:30:23 PM' ) );
+	}
+
+	public function testGetSet()
+	{
+		$dn = new IsTime();
+		$dn->setFormat( 'g:i:s A' );
+		$this->assertEquals( 'g:i:s A', $dn->getFormat() );
 	}
 }

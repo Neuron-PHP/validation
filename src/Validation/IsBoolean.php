@@ -5,16 +5,20 @@ namespace Neuron\Validation;
 /**
  * Requires a boolean.
  */
-class Boolean extends Base
+class IsBoolean extends Base
 {
 	private $_Loose;
 
-	public function __construct( $Loose = false )
+	/**
+	 * @param bool $Loose
+	 */
+	public function __construct( bool $Loose = false )
 	{
 		$this->_Loose = $Loose;
+		parent::__construct();
 	}
 
-	protected function validate( $Value ) : bool
+	protected function validate(  mixed $Value ) : bool
 	{
 		$Result = false;
 

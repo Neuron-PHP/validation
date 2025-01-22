@@ -5,9 +5,18 @@ namespace Neuron\Validation;
 /**
  * Requires a floating point number.
  */
-class FloatingPoint extends Base
+class IsFloatingPoint extends Base
 {
-	protected function validate( $Value ) : bool
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	/**
+	 * @param mixed $Value
+	 * @return bool
+	 */
+	protected function validate( mixed $Value ) : bool
 	{
 		if( is_string( $Value ) )
 		{

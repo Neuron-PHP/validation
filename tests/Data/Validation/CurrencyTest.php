@@ -1,18 +1,21 @@
 <?php
 namespace Tests\Data\Validation;
 
-class CurrencyTest extends \PHPUnit\Framework\TestCase
+use Neuron\Validation\IsCurrency;
+use PHPUnit\Framework\TestCase;
+
+class CurrencyTest extends TestCase
 {
 	public function testFail()
 	{
-		$Currency = new \Neuron\Validation\Currency();
+		$Currency = new IsCurrency();
 
 		$this->assertFalse( $Currency->isValid( '3x' ) );
 	}
 
 	public function testPass()
 	{
-		$Currency = new \Neuron\Validation\Currency();
+		$Currency = new IsCurrency();
 
 		$this->assertTrue( $Currency->isValid( '1.01' ) );
 	}

@@ -5,7 +5,7 @@ namespace Tests\Data\Validation;
  * Created by PhpStorm.
  * User: lee
  * Date: 9/5/15
- * Time: 11:07 AM
+ * IsTime: 11:07 AM
  */
 
 class EmailTest
@@ -13,14 +13,14 @@ class EmailTest
 {
 	public function testFail()
 	{
-		$dn = new \Neuron\Validation\Email();
+		$dn = new \Neuron\Validation\IsEmail();
 
 		$this->assertFalse( $dn->isValid( 'test_example.org' ) );
 	}
 
 	public function testPass()
 	{
-		$dn = new \Neuron\Validation\Email();
+		$dn = new \Neuron\Validation\IsEmail();
 
 		$this->assertTrue( $dn->isValid( 'test@example.org' ) );
 	}

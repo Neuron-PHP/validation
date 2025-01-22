@@ -10,17 +10,32 @@ class Collection extends Base implements ICollection
 	private array $_Validators = [];
 	private array $_Failed = [];
 
-	protected function validate( $Data ) : bool
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	/**
+	 * @param mixed $Value
+	 * @return bool
+	 */
+	protected function validate( mixed $Value ) : bool
 	{
 		$this->_Failed = [];
 
-		array_walk( $this->_Validators, [ $this, 'validateItem' ], $Data );
+		array_walk( $this->_Validators, [ $this, 'validateItem' ], $Value );
 
-		return count( $this->_Failed ) > 0 ? false : true;
+		return !count( $this->_Failed ) > 0;
 	}
 
-
-	public function validateItem( $Validator, $Name, $Data )
+	/**
+	 * Validate an individual item by name.
+	 * @param IValidator $Validator
+	 * @param string $Name
+	 * @param mixed $Data
+	 * @return void
+	 */
+	public function validateItem( IValidator $Validator, string $Name, mixed $Data ): void
 	{
 		if( !$Validator->isValid( $Data ) )
 		{
@@ -29,6 +44,7 @@ class Collection extends Base implements ICollection
 	}
 
 	/**
+	 * Adds a named validator to the collection.
 	 * @param string $Name
 	 * @param IValidator $Validator
 	 * @return $this
@@ -43,6 +59,7 @@ class Collection extends Base implements ICollection
 	}
 
 	/**
+	 * Gets a validator by name.
 	 * @param string $Name
 	 * @return IValidator|null
 	 */
@@ -57,6 +74,7 @@ class Collection extends Base implements ICollection
 	}
 
 	/**
+	 * Removes a validator by name.
 	 * @param string $Name
 	 * @return bool
 	 */
@@ -68,13 +86,14 @@ class Collection extends Base implements ICollection
 		}
 
 		unset( $this->_Validators[ $Name ] );
+
 		return true;
 	}
 
 	/**
+	 * Returns the list of failed validations.
 	 * @return mixed
 	 *
-	 * Returns the list of failed validations.
 	 */
 	public function getViolations() : array
 	{
