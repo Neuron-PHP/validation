@@ -1,4 +1,5 @@
 ## 0.7.1
+* Added IsUuid validation.
 
 ## 0.7.00 2025-01-21
 * Major refactoring. Renamed all of the validators.

@@ -13,59 +13,63 @@ Install the neuron validation component:
 
 ## Validation
 
-### ArrayData
+### IsArray
 
-### Boolean
+### IsBoolean
 
-### Currency
+### IsCurrency
 
-### Date
+### IsDate
 
-### DateRange
+### IsDateRange
 
-### DateTime
+### IsDateTime
 
-### DateWithinRange
+### IsDateWithinRange
 
-### Ein
+### IsEin
 
-### Email
+### IsEmail
 
-### FloatingPoint
+### IsFloatingPoint
 
-### Integer
+### IsInteger
 
-### IPAddress
+### IsIpAddress
 
-### Json
+### IsJson
 
-### Name
+### IsName
 
-### NotEmpty
+### IsNotEmpty
 
-### NotNull
+### IsNotNull
 
-### NumberWithinRange
+### IsNumberWithinRange
 
-### Numeric
+### IsNumeric
 
-### NumericRange
+### IsNumericRange
 
-### PhoneNumber
+### IsPhoneNumber
 
-### Policy
+### IsPositive
 
-### Positive
+### IsString
 
-### StringData (String)
+### IsStringLength
 
-### StringLength
+### IsTime
 
-### Time
+### IsUpc
 
-### Upc
+### IsUrl
 
-### Url
+### IsUuid
+
+## Container
+
+## Policy
 
 # More Information
 
