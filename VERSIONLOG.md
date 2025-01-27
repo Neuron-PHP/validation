@@ -1,4 +1,5 @@
 ## 0.7.2
+* Updated to data 0.7
 
 ## 0.7.1 2025-01-27
 * Added IsUuid validation.
