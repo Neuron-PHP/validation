@@ -1,3 +1,5 @@
+## 0.7.4
+
 ## 0.7.3 2025-11-06
 * Updated data to 0.8.
 * Updated validator interfiace.
