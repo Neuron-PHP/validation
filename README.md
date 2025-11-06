@@ -1,4 +1,4 @@
-[![Build Status](https://app.travis-ci.com/Neuron-PHP/validation.svg?token=F8zCwpT7x7Res7J2N4vF&branch=master)](https://app.travis-ci.com/Neuron-PHP/validation)
+[![CI](https://github.com/Neuron-PHP/validation/actions/workflows/ci.yml/badge.svg)](https://github.com/Neuron-PHP/validation/actions)
 # Neuron-PHP Validation
 
 ## Overview
