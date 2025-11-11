@@ -4,31 +4,31 @@ namespace Neuron\Validation;
 
 class IsStringLength extends Base
 {
-	private int $_MinLength;
-	private int $_MaxLength;
+	private int $_minLength;
+	private int $_maxLength;
 
 	/**
 	 * Constructor method to initialize the minimum and maximum lengths.
 	 *
-	 * @param int $Min The minimum length.
-	 * @param int $Max The maximum length.
+	 * @param int $min The minimum length.
+	 * @param int $max The maximum length.
 	 * @return void
 	 */
-	public function __construct( int $Min, int $Max )
+	public function __construct( int $min, int $max )
 	{
 		parent::__construct();
 
-		$this->_MinLength = $Min;
-		$this->_MaxLength = $Max;
+		$this->_minLength = $min;
+		$this->_maxLength = $max;
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		$Length = strlen( $Value );
-		return $this->_MinLength <= $Length && $Length <= $this->_MaxLength;
+		$length = strlen( $value );
+		return $this->_minLength <= $length && $length <= $this->_maxLength;
 	}
 }

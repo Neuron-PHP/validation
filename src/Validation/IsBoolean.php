@@ -7,45 +7,45 @@ namespace Neuron\Validation;
  */
 class IsBoolean extends Base
 {
-	private $_Loose;
+	private $_loose;
 
 	/**
-	 * @param bool $Loose
+	 * @param bool $loose
 	 */
-	public function __construct( bool $Loose = false )
+	public function __construct( bool $loose = false )
 	{
-		$this->_Loose = $Loose;
+		$this->_loose = $loose;
 		parent::__construct();
 	}
 
-	protected function validate(  mixed $Value ) : bool
+	protected function validate(  mixed $value ) : bool
 	{
-		$Result = false;
+		$result = false;
 
-		if( $this->_Loose )
+		if( $this->_loose )
 		{
-			if( $Value === 0 || $Value === 1 )
+			if( $value === 0 || $value === 1 )
 			{
-				$Result = true;
+				$result = true;
 			}
 
-			if( $Value === '0' || $Value == '1' )
+			if( $value === '0' || $value == '1' )
 			{
-				$Result = true;
+				$result = true;
 			}
 
-			$Value = strtolower( $Value );
+			$value = strtolower( $value );
 
-			if( $Value === 'false' || $Value == 'true' || $Value == 'on' || $Value == 'yes' || $Value == 'no' || $Value == 'off' )
+			if( $value === 'false' || $value == 'true' || $value == 'on' || $value == 'yes' || $value == 'no' || $value == 'off' )
 			{
-				$Result = true;
+				$result = true;
 			}
 		}
 		else
 		{
-			$Result = is_bool( $Value );
+			$result = is_bool( $value );
 		}
 
-		return $Result;
+		return $result;
 	}
 }

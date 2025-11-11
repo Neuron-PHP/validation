@@ -13,11 +13,11 @@ class IsNotEmpty extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		return !empty( $Value );
+		return !empty( $value );
 	}
 }

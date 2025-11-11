@@ -13,12 +13,12 @@ class IsInteger extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		if( is_int( $Value ) )
+		if( is_int( $value ) )
 		{
 			return true;
 		}

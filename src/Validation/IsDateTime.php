@@ -7,7 +7,7 @@ namespace Neuron\Validation;
  */
 class IsDateTime extends Base
 {
-	private string $_Format = 'Y-m-d H:i:s';
+	private string $_format = 'Y-m-d H:i:s';
 
 	public function __construct()
 	{
@@ -15,21 +15,21 @@ class IsDateTime extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		return date( $this->_Format, strtotime( $Value ) ) == $Value;
+		return date( $this->_format, strtotime( $value ) ) == $value;
 	}
 
 	/**
-	 * @param $Format - Specify the date format to validate to. Defaults to Y-m-d
+	 * @param $format - Specify the date format to validate to. Defaults to Y-m-d
 	 * @return $this
 	 */
-	public function setFormat( string $Format ) : IValidator
+	public function setFormat( string $format ) : IValidator
 	{
-		$this->_Format = $Format;
+		$this->_format = $format;
 
 		return $this;
 	}

@@ -14,13 +14,13 @@ class IsDateRange extends IsDate
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		$startTS = strtotime( $Value->Start );
-		$endTS   = strtotime( $Value->End );
+		$startTS = strtotime( $value->Start );
+		$endTS   = strtotime( $value->End );
 
 		return ( $startTS < $endTS );
 	}

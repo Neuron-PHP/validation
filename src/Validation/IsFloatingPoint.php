@@ -13,16 +13,16 @@ class IsFloatingPoint extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		if( is_string( $Value ) )
+		if( is_string( $value ) )
 		{
-			return $Value == ( (string)(float)$Value );
+			return $value == ( (string)(float)$value );
 		}
 
-		return is_float( $Value );
+		return is_float( $value );
 	}
 }

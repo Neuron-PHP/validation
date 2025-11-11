@@ -13,11 +13,11 @@ class IsNumeric extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		return is_numeric( $Value );
+		return is_numeric( $value );
 	}
 }

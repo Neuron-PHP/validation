@@ -1,3 +1,6 @@
+## 0.7.4 2025-11-11
+* Converted to camelcase.
+
 ## 0.7.3 2025-11-06
 * Updated data to 0.8.
 * Updated validator interfiace.

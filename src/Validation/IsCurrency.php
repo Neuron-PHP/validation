@@ -15,11 +15,11 @@ class IsCurrency extends Base
 	/**
 	 * Validates if the value is in a currency format.
 	 *
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	public function validate( mixed $Value ) : bool
+	public function validate( mixed $value ) : bool
 	{
-		return preg_match( "/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $Value ) == 1 ? true : false;
+		return preg_match( "/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $value ) == 1 ? true : false;
 	}
 }

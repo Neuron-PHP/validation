@@ -13,11 +13,11 @@ class IsEin extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	public function validate( mixed $Value ) : bool
+	public function validate( mixed $value ) : bool
 	{
-		return preg_match( "/^[0-9]{2}-[0-9]{7}$/", $Value ) == 1 ? true : false;
+		return preg_match( "/^[0-9]{2}-[0-9]{7}$/", $value ) == 1 ? true : false;
 	}
 }

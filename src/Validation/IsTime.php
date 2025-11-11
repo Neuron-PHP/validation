@@ -7,7 +7,7 @@ namespace Neuron\Validation;
  */
 class IsTime extends Base
 {
-	private string $_Format = 'g:i:s A';
+	private string $_format = 'g:i:s A';
 
 	public function __construct()
 	{
@@ -15,22 +15,22 @@ class IsTime extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		$Time = \DateTime::createFromFormat( $this->_Format, $Value );
-		return $Time && $Time->format( $this->_Format ) == $Value;
+		$time = \DateTime::createFromFormat( $this->_format, $value );
+		return $time && $time->format( $this->_format ) == $value;
 	}
 
 	/**
-	 * @param string $Format
+	 * @param string $format
 	 * @return void
 	 */
-	public function setFormat( string $Format ): void
+	public function setFormat( string $format ): void
 	{
-		$this->_Format = $Format;
+		$this->_format = $format;
 	}
 
 	/**
@@ -38,6 +38,6 @@ class IsTime extends Base
 	 */
 	public function getFormat(): string
 	{
-		return $this->_Format;
+		return $this->_format;
 	}
 }

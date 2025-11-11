@@ -13,11 +13,11 @@ class IsNotNull extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		return !is_null( $Value );
+		return !is_null( $value );
 	}
 }

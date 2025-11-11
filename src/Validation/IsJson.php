@@ -13,16 +13,16 @@ class IsJson extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		if( !is_string( $Value ) )
+		if( !is_string( $value ) )
 		{
 			return false;
 		}
 
-		return !is_null( json_decode( $Value ) );
+		return !is_null( json_decode( $value ) );
 	}
 }

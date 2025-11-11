@@ -14,19 +14,19 @@ abstract class Base implements IValidator
 
 	/**
 	 * Abstract method to be implemented by all validators.
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	abstract protected function validate( mixed $Value ) : bool;
+	abstract protected function validate( mixed $value ) : bool;
 
 	/**
 	 * Returns true if validation is successful
 	 *
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	public function isValid( mixed $Value ) : bool
+	public function isValid( mixed $value ) : bool
 	{
-		return $this->validate( $Value );
+		return $this->validate( $value );
 	}
 }

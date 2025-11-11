@@ -4,11 +4,11 @@ namespace Neuron\Validation;
 
 class IsRegExPattern extends Base
 {
-	private string $_Pattern;
+	private string $_pattern;
 
-	public function __construct( $Pattern )
+	public function __construct( $pattern )
 	{
-		$this->_Pattern = $Pattern;
+		$this->_pattern = $pattern;
 		parent::__construct();
 	}
 
@@ -18,25 +18,25 @@ class IsRegExPattern extends Base
 	 */
 	public function getPattern(): string
 	{
-		return $this->_Pattern;
+		return $this->_pattern;
 	}
 
 	/**
 	 * Sets the regex pattern.
-	 * @param string $Pattern
+	 * @param string $pattern
 	 * @return void
 	 */
-	public function setPattern( string $Pattern ): void
+	public function setPattern( string $pattern ): void
 	{
-		$this->_Pattern = $Pattern;
+		$this->_pattern = $pattern;
 	}
 
 	/**
-	 * @param $Value
+	 * @param $value
 	 * @return bool
 	 */
-	protected function validate( $Value ): bool
+	protected function validate( $value ): bool
 	{
-		return preg_match( $this->_Pattern, $Value ) === 1;
+		return preg_match( $this->_pattern, $value ) === 1;
 	}
 }

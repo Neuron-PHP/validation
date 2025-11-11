@@ -13,23 +13,23 @@ class IsUpc extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value) : bool
+	protected function validate( mixed $value) : bool
 	{
 		// validate upc code
-		if (preg_match( '/^[0-9]{12}$/', $Value))
+		if (preg_match( '/^[0-9]{12}$/', $value))
 		{
 			$check = 0;
 			for ($i = 0; $i < 11; $i += 2) {
-				$check += $Value[ $i];
+				$check += $value[ $i];
 			}
 			$check *= 3;
 			for ($i = 1; $i < 11; $i += 2) {
-				$check += $Value[ $i];
+				$check += $value[ $i];
 			}
-			return ( $Value[ 11] == ((10 - ($check % 10)) % 10));
+			return ( $value[ 11] == ((10 - ($check % 10)) % 10));
 		}
 		return false;
 	}

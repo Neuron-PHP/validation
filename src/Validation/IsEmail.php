@@ -12,8 +12,8 @@ class IsEmail extends Base
 		parent::__construct();
 	}
 
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		return (bool)filter_var( $Value, FILTER_VALIDATE_EMAIL );
+		return (bool)filter_var( $value, FILTER_VALIDATE_EMAIL );
 	}
 }

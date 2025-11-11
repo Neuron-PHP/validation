@@ -9,22 +9,22 @@ use Neuron\Data;
  */
 class IsNumberWithinRange extends Base
 {
-	private Data\Object\NumericRange $_Range;
+	private Data\Object\NumericRange $_range;
 
-	public function __construct( Data\Object\NumericRange $Range )
+	public function __construct( Data\Object\NumericRange $range )
 	{
-		$this->setRange( $Range );
+		$this->setRange( $range );
 
 		parent::__construct();
 	}
 
 	/**
-	 * @param Data\Object\NumericRange $Range
+	 * @param Data\Object\NumericRange $range
 	 * @return $this
 	 */
-	public function setRange( Data\Object\NumericRange $Range ): static
+	public function setRange( Data\Object\NumericRange $range ): static
 	{
-		$this->_Range = $Range;
+		$this->_range = $range;
 
 		return $this;
 	}
@@ -34,15 +34,15 @@ class IsNumberWithinRange extends Base
 	 */
 	public function getRange(): Data\Object\NumericRange
 	{
-		return $this->_Range;
+		return $this->_range;
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		return ( ( $Value >= $this->_Range->Minimum ) && ( $Value <= $this->_Range->Maximum ) );
+		return ( ( $value >= $this->_range->Minimum ) && ( $value <= $this->_range->Maximum ) );
 	}
 }
