@@ -19,8 +19,8 @@ class IsDateRange extends IsDate
 	 */
 	protected function validate( mixed $value ) : bool
 	{
-		$startTS = strtotime( $value->Start );
-		$endTS   = strtotime( $value->End );
+		$startTS = strtotime( $value->start );
+		$endTS   = strtotime( $value->end );
 
 		return ( $startTS < $endTS );
 	}

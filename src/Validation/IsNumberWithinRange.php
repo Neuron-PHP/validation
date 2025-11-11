@@ -43,6 +43,6 @@ class IsNumberWithinRange extends Base
 	 */
 	protected function validate( mixed $value ) : bool
 	{
-		return ( ( $value >= $this->_range->Minimum ) && ( $value <= $this->_range->Maximum ) );
+		return ( ( $value >= $this->_range->minimum ) && ( $value <= $this->_range->maximum ) );
 	}
 }

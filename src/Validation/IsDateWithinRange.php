@@ -34,8 +34,8 @@ class IsDateWithinRange extends IsDate
 			return false;
 		}
 
-		$startTS = strtotime( $this->_range->Start );
-		$endTS   = strtotime( $this->_range->End );
+		$startTS = strtotime( $this->_range->start );
+		$endTS   = strtotime( $this->_range->end );
 		$dateTS  = strtotime( $value );
 
 		return ( $dateTS >= $startTS ) && ( $dateTS <= $endTS );
