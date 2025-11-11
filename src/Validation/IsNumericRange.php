@@ -18,6 +18,6 @@ class IsNumericRange extends Base
 	 */
 	protected function validate( $value ) : bool
 	{
-		return ( $value->Minimum < $value->Maximum );
+		return ( $value->minimum < $value->maximum );
 	}
 }
