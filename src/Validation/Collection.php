@@ -7,8 +7,8 @@ namespace Neuron\Validation;
  */
 class Collection extends Base implements ICollection
 {
-	private array $_Validators = [];
-	private array $_Failed = [];
+	private array $_validators = [];
+	private array $_failed = [];
 
 	public function __construct()
 	{
@@ -16,76 +16,76 @@ class Collection extends Base implements ICollection
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		$this->_Failed = [];
+		$this->_failed = [];
 
-		array_walk( $this->_Validators, [ $this, 'validateItem' ], $Value );
+		array_walk( $this->_validators, [ $this, 'validateItem' ], $value );
 
-		return !count( $this->_Failed ) > 0;
+		return !count( $this->_failed ) > 0;
 	}
 
 	/**
 	 * Validate an individual item by name.
-	 * @param IValidator $Validator
-	 * @param string $Name
-	 * @param mixed $Data
+	 * @param IValidator $validator
+	 * @param string $name
+	 * @param mixed $data
 	 * @return void
 	 */
-	public function validateItem( IValidator $Validator, string $Name, mixed $Data ): void
+	public function validateItem( IValidator $validator, string $name, mixed $data ): void
 	{
-		if( !$Validator->isValid( $Data ) )
+		if( !$validator->isValid( $data ) )
 		{
-			$this->_Failed[] = $Name;
+			$this->_failed[] = $name;
 		}
 	}
 
 	/**
 	 * Adds a named validator to the collection.
-	 * @param string $Name
-	 * @param IValidator $Validator
+	 * @param string $name
+	 * @param IValidator $validator
 	 * @return $this
 	 *
 	 * Add a validator to the collection.
 	 */
-	public function add( string $Name, IValidator $Validator ) : ICollection
+	public function add( string $name, IValidator $validator ) : ICollection
 	{
-		$this->_Validators[ $Name ] = $Validator;
+		$this->_validators[ $name ] = $validator;
 
 		return $this;
 	}
 
 	/**
 	 * Gets a validator by name.
-	 * @param string $Name
+	 * @param string $name
 	 * @return IValidator|null
 	 */
-	public function get( string $Name ) : ?IValidator
+	public function get( string $name ) : ?IValidator
 	{
-		if( !array_key_exists( $Name, $this->_Validators ) )
+		if( !array_key_exists( $name, $this->_validators ) )
 		{
 			return null;
 		}
 
-		return $this->_Validators[ $Name ];
+		return $this->_validators[ $name ];
 	}
 
 	/**
 	 * Removes a validator by name.
-	 * @param string $Name
+	 * @param string $name
 	 * @return bool
 	 */
-	public function remove( string $Name ): bool
+	public function remove( string $name ): bool
 	{
-		if( !array_key_exists( $Name, $this->_Validators ) )
+		if( !array_key_exists( $name, $this->_validators ) )
 		{
 			return false;
 		}
 
-		unset( $this->_Validators[ $Name ] );
+		unset( $this->_validators[ $name ] );
 
 		return true;
 	}
@@ -97,6 +97,6 @@ class Collection extends Base implements ICollection
 	 */
 	public function getViolations() : array
 	{
-		return $this->_Failed;
+		return $this->_failed;
 	}
 }

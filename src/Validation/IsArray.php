@@ -12,8 +12,8 @@ class IsArray extends Base
 		parent::__construct();
 	}
 
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		return is_array( $Value );
+		return is_array( $value );
 	}
 }

@@ -14,25 +14,25 @@ namespace Neuron\Validation;
 interface ICollection extends IValidator
 {
 	/**
-	 * @param string $Name
-	 * @param IValidator $Validator
+	 * @param string $name
+	 * @param IValidator $validator
 	 * @return $this
 	 *
 	 * Add a validator to the collection.
 	 */
-	public function add( string $Name, IValidator $Validator ) : ICollection;
+	public function add( string $name, IValidator $validator ) : ICollection;
 
 	/**
-	 * @param string $Name
+	 * @param string $name
 	 * @return IValidator|null
 	 */
-	public function get( string $Name ) : ?IValidator;
+	public function get( string $name ) : ?IValidator;
 
 	/**
-	 * @param string $Name
+	 * @param string $name
 	 * @return bool
 	 */
-	public function remove( string $Name ) : bool;
+	public function remove( string $name ) : bool;
 
 	/**
 	 * @return mixed

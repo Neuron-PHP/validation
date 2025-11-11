@@ -13,11 +13,11 @@ class IsObject extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		return is_object( $Value );
+		return is_object( $value );
 	}
 }

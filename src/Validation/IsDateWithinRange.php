@@ -15,39 +15,39 @@ use Neuron\Data\Object\DateRange;
  */
 class IsDateWithinRange extends IsDate
 {
-	private DateRange $_Range;
+	private DateRange $_range;
 
-	public function __construct( DateRange $Range )
+	public function __construct( DateRange $range )
 	{
-		$this->setRange( $Range );
+		$this->setRange( $range );
 		parent::__construct();
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		if( !parent::validate( $Value ) )
+		if( !parent::validate( $value ) )
 		{
 			return false;
 		}
 
-		$startTS = strtotime( $this->_Range->Start );
-		$endTS   = strtotime( $this->_Range->End );
-		$dateTS  = strtotime( $Value );
+		$startTS = strtotime( $this->_range->Start );
+		$endTS   = strtotime( $this->_range->End );
+		$dateTS  = strtotime( $value );
 
 		return ( $dateTS >= $startTS ) && ( $dateTS <= $endTS );
 	}
 
 	/**
-	 * @param DateRange $Range
+	 * @param DateRange $range
 	 * @return $this
 	 */
-	public function setRange( DateRange $Range ) : IValidator
+	public function setRange( DateRange $range ) : IValidator
 	{
-		$this->_Range = $Range;
+		$this->_range = $range;
 
 		return $this;
 	}
@@ -57,6 +57,6 @@ class IsDateWithinRange extends IsDate
 	 */
 	public function getRange() : DateRange
 	{
-		return $this->_Range;
+		return $this->_range;
 	}
 }

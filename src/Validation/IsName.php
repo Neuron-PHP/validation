@@ -20,11 +20,11 @@ class IsName extends Base
 	}
 
 	/**
-	 * @param $Value
+	 * @param $value
 	 * @return bool
 	 */
-	public function validate( mixed $Value ) : bool
+	public function validate( mixed $value ) : bool
 	{
-		return preg_match( "/^[a-zA-Z,. ]*$/", $Value ) == 1;
+		return preg_match( "/^[a-zA-Z,. ]*$/", $value ) == 1;
 	}
 }

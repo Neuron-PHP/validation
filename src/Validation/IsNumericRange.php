@@ -13,11 +13,11 @@ class IsNumericRange extends Base
 	}
 
 	/**
-	 * @param $Value
+	 * @param $value
 	 * @return bool
 	 */
-	protected function validate( $Value ) : bool
+	protected function validate( $value ) : bool
 	{
-		return ( $Value->Minimum < $Value->Maximum );
+		return ( $value->Minimum < $value->Maximum );
 	}
 }

@@ -13,11 +13,11 @@ class IsPositive extends Base
 	}
 
 	/**
-	 * @param $Value
+	 * @param $value
 	 * @return bool
 	 */
-	public function validate( $Value ) : bool
+	public function validate( $value ) : bool
 	{
-		return !( $Value < 0 );
+		return !( $value < 0 );
 	}
 }

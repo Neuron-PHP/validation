@@ -13,11 +13,11 @@ class IsUrl extends Base
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	protected function validate( mixed $Value ) : bool
+	protected function validate( mixed $value ) : bool
 	{
-		return (bool)filter_var( $Value, FILTER_VALIDATE_URL );
+		return (bool)filter_var( $value, FILTER_VALIDATE_URL );
 	}
 }

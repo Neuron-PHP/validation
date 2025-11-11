@@ -13,11 +13,11 @@ class IsPhoneNumber extends Base
 	const US_PATTERN            = "/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/";
 	const INTERNATIONAL_PATTERN = "/^\+(?:[0-9] ?){6,14}[0-9]$/";
 
-	public $_Type;
+	public $_type;
 
-	public function __construct( int $Type = self::US )
+	public function __construct( int $type = self::US )
 	{
-		$this->_Type = $Type;
+		$this->_type = $type;
 
 		return parent::__construct();
 	}
@@ -27,30 +27,30 @@ class IsPhoneNumber extends Base
 	 */
 	public function getType(): int
 	{
-		return $this->_Type;
+		return $this->_type;
 	}
 
 	/**
-	 * @param int $Type
+	 * @param int $type
 	 * @return IsPhoneNumber
 	 */
-	public function setType( int $Type ): IsPhoneNumber
+	public function setType( int $type ): IsPhoneNumber
 	{
-		$this->_Type = $Type;
+		$this->_type = $type;
 		return $this;
 	}
 
 	/**
-	 * @param mixed $Value
+	 * @param mixed $value
 	 * @return bool
 	 */
-	public function validate( mixed $Value ) : bool
+	public function validate( mixed $value ) : bool
 	{
 		if( $this->getType() == self::INTERNATIONAL )
 		{
-			return preg_match( self::INTERNATIONAL_PATTERN, $Value ) == 1;
+			return preg_match( self::INTERNATIONAL_PATTERN, $value ) == 1;
 		}
 
-		return preg_match( self::US_PATTERN, $Value ) == 1;
+		return preg_match( self::US_PATTERN, $value ) == 1;
 	}
 }
