@@ -1,3 +1,5 @@
+## 0.7.7
+
 ## 0.7.6 2025-11-14
 * Added password validation.
 
