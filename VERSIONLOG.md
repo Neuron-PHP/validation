@@ -1,7 +1,7 @@
 ## 0.7.6
+* Added password validation.
 
 ## 0.7.5 2025-11-11
-
 ## 0.7.4 2025-11-11
 * Converted to camelcase.
 
