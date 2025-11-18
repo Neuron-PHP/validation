@@ -1,3 +1,5 @@
+## 0.7.8
+
 ## 0.7.7 2025-11-18
 * Added base64 validation.
 
