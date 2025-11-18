@@ -1,3 +1,6 @@
+## 0.7.7 2025-11-18
+* Added base64 validation.
+
 ## 0.7.6 2025-11-14
 * Added password validation.
 
@@ -7,7 +10,7 @@
 
 ## 0.7.3 2025-11-06
 * Updated data to 0.8.
-* Updated validator interfiace.
+* Updated validator interface.
 
 ## 0.7.2 2025-01-27
 * Updated to data 0.7
@@ -16,7 +19,7 @@
 * Added IsUuid validation.
 
 ## 0.7.00 2025-01-21
-* Major refactoring. Renamed all of the validators.
+* Major refactoring. Renamed all the validators.
 
 ## 0.6.15 2025-01-21
 * Added RegExPattern validation.

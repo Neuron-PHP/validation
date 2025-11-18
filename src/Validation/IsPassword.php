@@ -82,7 +82,7 @@ class IsPassword extends Base
 	 * Validates the password against configured requirements.
 	 *
 	 * @param mixed $value The password to validate
-	 * @return bool True if password meets all requirements, false otherwise
+	 * @return bool True if the password meets all requirements, false otherwise
 	 */
 	protected function validate( mixed $value ) : bool
 	{
