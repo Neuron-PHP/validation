@@ -9,7 +9,7 @@ class NumericRangeTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue(
 			$Validator->isValid(
-				new \Neuron\Data\Object\NumericRange( 1, 10 )
+				new \Neuron\Data\Objects\NumericRange( 1, 10 )
 			)
 		);
 	}
@@ -20,7 +20,7 @@ class NumericRangeTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertFalse(
 			$Validator->isValid(
-				new \Neuron\Data\Object\NumericRange( 10, 1 )
+				new \Neuron\Data\Objects\NumericRange( 10, 1 )
 			)
 		);
 	}

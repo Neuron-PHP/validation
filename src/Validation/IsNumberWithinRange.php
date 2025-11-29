@@ -9,9 +9,9 @@ use Neuron\Data;
  */
 class IsNumberWithinRange extends Base
 {
-	private Data\Object\NumericRange $_range;
+	private Data\Objects\NumericRange $_range;
 
-	public function __construct( Data\Object\NumericRange $range )
+	public function __construct( Data\Objects\NumericRange $range )
 	{
 		$this->setRange( $range );
 
@@ -19,10 +19,10 @@ class IsNumberWithinRange extends Base
 	}
 
 	/**
-	 * @param Data\Object\NumericRange $range
+	 * @param Data\Objects\NumericRange $range
 	 * @return $this
 	 */
-	public function setRange( Data\Object\NumericRange $range ): static
+	public function setRange( Data\Objects\NumericRange $range ): static
 	{
 		$this->_range = $range;
 
@@ -30,9 +30,9 @@ class IsNumberWithinRange extends Base
 	}
 
 	/**
-	 * @return Data\Object\NumericRange
+	 * @return Data\Objects\NumericRange
 	 */
-	public function getRange(): Data\Object\NumericRange
+	public function getRange(): Data\Objects\NumericRange
 	{
 		return $this->_range;
 	}

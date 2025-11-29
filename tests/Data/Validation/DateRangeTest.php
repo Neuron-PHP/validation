@@ -14,7 +14,7 @@ class DateRangeTest extends TestCase
 
 		$this->assertFalse(
 			$Validator->isValid(
-				new \Neuron\Data\Object\DateRange( '2000-01-01', '2000-01-01' )
+				new \Neuron\Data\Objects\DateRange( '2000-01-01', '2000-01-01' )
 			)
 		);
 	}
@@ -27,7 +27,7 @@ class DateRangeTest extends TestCase
 
 		$this->assertTrue(
 			$Validator->isValid(
-				new \Neuron\Data\Object\DateRange( '2000-01-01', '2000-01-03' )
+				new \Neuron\Data\Objects\DateRange( '2000-01-01', '2000-01-03' )
 			)
 		);
 	}

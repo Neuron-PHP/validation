@@ -8,7 +8,7 @@
 
 namespace Neuron\Validation;
 
-use Neuron\Data\Object\DateRange;
+use Neuron\Data\Objects\DateRange;
 
 /**
  * Requires a date within a specified range.

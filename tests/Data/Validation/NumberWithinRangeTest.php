@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Data\Validation;
 
-use Neuron\Data\Object\NumericRange;
+use Neuron\Data\Objects\NumericRange;
 use Neuron\Validation\IsNumberWithinRange;
 
 class NumberWithinRangeTest extends \PHPUnit\Framework\TestCase

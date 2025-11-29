@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Data\Validation;
 
-use Neuron\Data\Object\DateRange;
+use Neuron\Data\Objects\DateRange;
 use Neuron\Validation\IsDateWithinRange;
 use PHPUnit\Framework\TestCase;
 
