@@ -1,4 +1,5 @@
 [![CI](https://github.com/Neuron-PHP/validation/actions/workflows/ci.yml/badge.svg)](https://github.com/Neuron-PHP/validation/actions)
+[![codecov](https://codecov.io/gh/Neuron-PHP/validation/graph/badge.svg)](https://codecov.io/gh/Neuron-PHP/validation)
 # Neuron-PHP Validation
 
 ## Overview
