@@ -149,8 +149,8 @@ class IsImage extends Base
 		}
 		elseif( $this->checkImageData )
 		{
-			// No MIME restrictions but need to validate image data
-			return $this->validateImageData( $decoded );
+			// No MIME restrictions but need to check if it's a recognizable image
+			return $this->isRecognizableImage( $decoded );
 		}
 
 		return true;
@@ -198,12 +198,14 @@ class IsImage extends Base
 	}
 
 	/**
-	 * Validates that the decoded data is actually a valid image.
+	 * Checks if the decoded data is a recognizable image format.
+	 * This method only validates that the data contains valid image signatures,
+	 * without checking MIME type restrictions (caller's responsibility).
 	 *
 	 * @param string $imageData
 	 * @return bool
 	 */
-	private function validateImageData( string $imageData ) : bool
+	private function isRecognizableImage( string $imageData ) : bool
 	{
 		// Use the extracted method to detect image type
 		$detectedType = $this->detectImageType( $imageData );
@@ -214,19 +216,8 @@ class IsImage extends Base
 			$detectedType = $this->detectSvg( $imageData );
 		}
 
-		// If no signature matched, it's not a valid image
-		if( $detectedType === null )
-		{
-			return false;
-		}
-
-		// Check if detected type is in allowed MIME types
-		if( !empty( $this->allowedMimeTypes ) && !$this->isMimeTypeAllowed( $detectedType ) )
-		{
-			return false;
-		}
-
-		return true;
+		// Return true if we recognized any valid image format
+		return $detectedType !== null;
 	}
 
 	/**
