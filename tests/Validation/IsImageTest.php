@@ -178,20 +178,58 @@ class IsImageTest extends TestCase
 	}
 
 	/**
-	 * Test SVG image support.
+	 * Test SVG image support with explicit opt-in.
 	 */
-	public function testSvgImageSupport()
+	public function testSvgImageSupportWithOptIn()
 	{
 		// Simple SVG in base64
-		$svgContent = '<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>';
+		$svgContent = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>';
 		$svgBase64 = base64_encode( $svgContent );
 
+		// Default validator (SVG not allowed)
 		$validator = new IsImage();
-		$this->assertTrue( $validator->isValid( $svgBase64 ) );
+		$this->assertFalse( $validator->isValid( $svgBase64 ) );
 
-		// SVG data URI
+		// Validator with SVG explicitly allowed
+		$validatorWithSvg = new IsImage( [], null, true, true );
+		$this->assertTrue( $validatorWithSvg->isValid( $svgBase64 ) );
+
+		// SVG data URI with explicit SVG support
 		$svgDataUri = 'data:image/svg+xml;base64,' . $svgBase64;
-		$this->assertTrue( $validator->isValid( $svgDataUri ) );
+		$this->assertFalse( $validator->isValid( $svgDataUri ) );
+		$this->assertTrue( $validatorWithSvg->isValid( $svgDataUri ) );
+	}
+
+	/**
+	 * Test that generic XML is not accepted as SVG.
+	 */
+	public function testGenericXmlNotAcceptedAsSvg()
+	{
+		// Generic XML that is not SVG
+		$xmlContent = '<?xml version="1.0"?><root><data>test</data></root>';
+		$xmlBase64 = base64_encode( $xmlContent );
+
+		// Even with SVG allowed, generic XML should not pass
+		$validatorWithSvg = new IsImage( [], null, true, true );
+		$this->assertFalse( $validatorWithSvg->isValid( $xmlBase64 ) );
+	}
+
+	/**
+	 * Test SVG detection requires proper SVG tag.
+	 */
+	public function testSvgDetectionRequiresSvgTag()
+	{
+		// SVG without proper tag
+		$invalidSvg1 = '<?xml version="1.0"?><notsvg xmlns="http://www.w3.org/2000/svg"></notsvg>';
+		$invalidBase64 = base64_encode( $invalidSvg1 );
+
+		$validatorWithSvg = new IsImage( [], null, true, true );
+		$this->assertFalse( $validatorWithSvg->isValid( $invalidBase64 ) );
+
+		// Valid SVG with proper tag
+		$validSvg = '<svg xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40"/></svg>';
+		$validBase64 = base64_encode( $validSvg );
+		$this->assertTrue( $validatorWithSvg->isValid( $validBase64 ) );
 	}
 
 	/**

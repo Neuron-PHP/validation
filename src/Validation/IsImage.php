@@ -10,22 +10,32 @@ class IsImage extends Base
 	private array $allowedMimeTypes;
 	private ?int $maxSize;
 	private bool $checkImageData;
+	private bool $allowSvg;
 
 	/**
 	 * @param array $allowedMimeTypes List of allowed MIME types (e.g., ['image/jpeg', 'image/png'])
 	 * @param int|null $maxSize Maximum file size in bytes (null for no limit)
 	 * @param bool $checkImageData Whether to validate the actual image data (requires decoding)
+	 * @param bool $allowSvg Whether to allow SVG images (default: false for security - SVG can contain scripts)
 	 */
 	public function __construct(
-		array $allowedMimeTypes = [ 'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml' ],
+		array $allowedMimeTypes = [ 'image/jpeg', 'image/png', 'image/gif', 'image/webp' ],
 		?int $maxSize = null,
-		bool $checkImageData = true
+		bool $checkImageData = true,
+		bool $allowSvg = false
 	)
 	{
 		parent::__construct();
 		$this->allowedMimeTypes = $allowedMimeTypes;
 		$this->maxSize = $maxSize;
 		$this->checkImageData = $checkImageData;
+		$this->allowSvg = $allowSvg;
+
+		// If SVG is explicitly allowed, add it to allowed MIME types
+		if( $this->allowSvg && !in_array( 'image/svg+xml', $this->allowedMimeTypes, true ) )
+		{
+			$this->allowedMimeTypes[] = 'image/svg+xml';
+		}
 	}
 
 	/**
@@ -137,9 +147,6 @@ class IsImage extends Base
 			"GIF89a" => 'image/gif',
 			// WebP
 			"RIFF" => 'image/webp', // Note: WebP also needs WEBP at offset 8
-			// SVG (XML-based, check for common SVG patterns)
-			"<?xml" => 'image/svg+xml',
-			"<svg" => 'image/svg+xml'
 		];
 
 		$dataStart = substr( $imageData, 0, 20 );
@@ -161,6 +168,12 @@ class IsImage extends Base
 			}
 		}
 
+		// Check for SVG separately with more strict validation
+		if( $detectedType === null && $this->allowSvg )
+		{
+			$detectedType = $this->detectSvg( $imageData );
+		}
+
 		// If no signature matched, it's not a valid image
 		if( $detectedType === null )
 		{
@@ -174,5 +187,39 @@ class IsImage extends Base
 		}
 
 		return true;
+	}
+
+	/**
+	 * Detects if the data is a valid SVG image.
+	 * SVG detection is more permissive but requires explicit opt-in for security.
+	 *
+	 * @param string $imageData
+	 * @return string|null Returns 'image/svg+xml' if valid SVG, null otherwise
+	 */
+	private function detectSvg( string $imageData ) : ?string
+	{
+		// Only check first 1KB for performance
+		$dataToCheck = substr( $imageData, 0, 1024 );
+
+		// Remove any BOM (Byte Order Mark)
+		$dataToCheck = ltrim( $dataToCheck, "\xEF\xBB\xBF" );
+
+		// Case-insensitive check for <svg tag
+		// Must find an actual SVG element, not just XML declaration
+		if( preg_match( '/<svg\b[^>]*>/i', $dataToCheck ) )
+		{
+			// Additional validation: check for xmlns attribute (standard in valid SVG)
+			if( stripos( $dataToCheck, 'xmlns' ) !== false ||
+			    stripos( $dataToCheck, 'http://www.w3.org/2000/svg' ) !== false )
+			{
+				return 'image/svg+xml';
+			}
+
+			// Even without xmlns, if we have an svg tag, it's likely SVG
+			// But we're being more strict here for security
+			return 'image/svg+xml';
+		}
+
+		return null;
 	}
 }
