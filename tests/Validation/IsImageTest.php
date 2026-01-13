@@ -325,6 +325,98 @@ class IsImageTest extends TestCase
 	}
 
 	/**
+	 * Test data URI with line-wrapped base64 (common in email/MIME).
+	 */
+	public function testDataUriWithLineWrappedBase64()
+	{
+		// PNG image with base64 wrapped at 76 characters (common MIME format)
+		$pngBase64Wrapped = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChw\nGA60e6kgAAAABJRU5ErkJggg==";
+
+		// Test with newline in base64 data
+		$dataUriWithNewline = 'data:image/png;base64,' . $pngBase64Wrapped;
+
+		$validator = new IsImage();
+		// Should pass - newlines are valid in base64 data URIs
+		$this->assertTrue( $validator->isValid( $dataUriWithNewline ) );
+
+		// Test with multiple newlines and spaces (also valid)
+		$pngBase64MultiLine = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJ\n" .
+		                      "AAAADUlEQVR42mNkYPhfDwAChw\n" .
+		                      "GA60e6kgAAAABJRU5ErkJggg==";
+
+		$dataUriMultiLine = 'data:image/png;base64,' . $pngBase64MultiLine;
+		$this->assertTrue( $validator->isValid( $dataUriMultiLine ) );
+
+		// Test with carriage return + newline (Windows style)
+		$pngBase64CRLF = str_replace("\n", "\r\n", $pngBase64Wrapped);
+		$dataUriCRLF = 'data:image/png;base64,' . $pngBase64CRLF;
+		$this->assertTrue( $validator->isValid( $dataUriCRLF ) );
+	}
+
+	/**
+	 * Test MIME type restrictions work for raw base64 input.
+	 */
+	public function testMimeTypeRestrictionsForRawBase64()
+	{
+		// PNG image as raw base64
+		$pngBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
+
+		// JPEG image as raw base64
+		$jpegBase64 = '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAr/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';
+
+		// Validator that only allows JPEG, even with checkImageData=false
+		$jpegOnlyValidator = new IsImage( [ 'image/jpeg' ], null, false );
+
+		// JPEG should pass
+		$this->assertTrue( $jpegOnlyValidator->isValid( $jpegBase64 ) );
+
+		// PNG should fail even with checkImageData=false
+		$this->assertFalse( $jpegOnlyValidator->isValid( $pngBase64 ) );
+
+		// Validator that only allows PNG
+		$pngOnlyValidator = new IsImage( [ 'image/png' ], null, false );
+
+		// PNG should pass
+		$this->assertTrue( $pngOnlyValidator->isValid( $pngBase64 ) );
+
+		// JPEG should fail
+		$this->assertFalse( $pngOnlyValidator->isValid( $jpegBase64 ) );
+	}
+
+	/**
+	 * Test empty allowedMimeTypes with SVG doesn't restrict to SVG only.
+	 */
+	public function testEmptyAllowedMimeTypesWithSvgAllowsAll()
+	{
+		// Empty array means allow all types
+		$validatorAllowAll = new IsImage( [], null, true, true );
+
+		// All image types should pass
+		$jpegBase64 = '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAr/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';
+		$this->assertTrue( $validatorAllowAll->isValid( $jpegBase64 ) );
+
+		$pngBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
+		$this->assertTrue( $validatorAllowAll->isValid( $pngBase64 ) );
+
+		$gifBase64 = 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+		$this->assertTrue( $validatorAllowAll->isValid( $gifBase64 ) );
+
+		// SVG should also pass
+		$svgBase64 = base64_encode( '<svg xmlns="http://www.w3.org/2000/svg"></svg>' );
+		$this->assertTrue( $validatorAllowAll->isValid( $svgBase64 ) );
+
+		// Now test with allowSvg=false but empty allowedMimeTypes
+		$validatorNoSvg = new IsImage( [], null, true, false );
+
+		// Non-SVG images should still pass
+		$this->assertTrue( $validatorNoSvg->isValid( $jpegBase64 ) );
+		$this->assertTrue( $validatorNoSvg->isValid( $pngBase64 ) );
+
+		// SVG should fail
+		$this->assertFalse( $validatorNoSvg->isValid( $svgBase64 ) );
+	}
+
+	/**
 	 * Test malformed data URI.
 	 */
 	public function testMalformedDataUri()

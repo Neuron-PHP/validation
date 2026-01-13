@@ -31,8 +31,9 @@ class IsImage extends Base
 		$this->checkImageData = $checkImageData;
 		$this->allowSvg = $allowSvg;
 
-		// If SVG is explicitly allowed, add it to allowed MIME types
-		if( $this->allowSvg && !in_array( 'image/svg+xml', $this->allowedMimeTypes, true ) )
+		// If SVG is explicitly allowed AND we have MIME type restrictions, add SVG to allowed list
+		// Don't add if allowedMimeTypes is empty (meaning allow all types)
+		if( $this->allowSvg && !empty( $this->allowedMimeTypes ) && !in_array( 'image/svg+xml', $this->allowedMimeTypes, true ) )
 		{
 			$this->allowedMimeTypes[] = 'image/svg+xml';
 		}
@@ -74,7 +75,8 @@ class IsImage extends Base
 	private function validateDataUri( string $dataUri ) : bool
 	{
 		// Parse data URI: data:[<mediatype>][;base64],<data>
-		$pattern = '/^data:([a-zA-Z0-9][a-zA-Z0-9\/+\-]*);base64,(.+)$/';
+		// Use 's' modifier to allow . to match newlines in base64 data
+		$pattern = '/^data:([a-zA-Z0-9][a-zA-Z0-9\/+\-]*);base64,(.+)$/s';
 
 		if( !preg_match( $pattern, $dataUri, $matches ) )
 		{
@@ -119,9 +121,35 @@ class IsImage extends Base
 			return false;
 		}
 
-		// If we need to check the actual image data
-		if( $this->checkImageData )
+		// Always validate image data to check MIME type restrictions
+		// Even when checkImageData is false, we need to detect the type for MIME validation
+		// but we can skip the more expensive image content validation
+		if( !empty( $this->allowedMimeTypes ) )
 		{
+			// Detect the image type from signatures
+			$detectedType = $this->detectImageType( $decoded );
+
+			// Check for SVG if allowed
+			if( $detectedType === null && $this->allowSvg )
+			{
+				$detectedType = $this->detectSvg( $decoded );
+			}
+
+			// If we couldn't detect a type, it's not a valid image
+			if( $detectedType === null )
+			{
+				return false;
+			}
+
+			// Check if detected type is allowed
+			if( !$this->isMimeTypeAllowed( $detectedType ) )
+			{
+				return false;
+			}
+		}
+		elseif( $this->checkImageData )
+		{
+			// No MIME restrictions but need to validate image data
 			return $this->validateImageData( $decoded );
 		}
 
@@ -129,12 +157,12 @@ class IsImage extends Base
 	}
 
 	/**
-	 * Validates that the decoded data is actually a valid image.
+	 * Detects image type from binary data signatures.
 	 *
 	 * @param string $imageData
-	 * @return bool
+	 * @return string|null Returns MIME type if detected, null otherwise
 	 */
-	private function validateImageData( string $imageData ) : bool
+	private function detectImageType( string $imageData ) : ?string
 	{
 		// Check for common image file signatures (magic numbers)
 		$signatures = [
@@ -152,7 +180,6 @@ class IsImage extends Base
 		$dataStart = substr( $imageData, 0, 20 );
 
 		// Check for image signatures
-		$detectedType = null;
 		foreach( $signatures as $signature => $mimeType )
 		{
 			if( strpos( $dataStart, $signature ) === 0 )
@@ -163,10 +190,23 @@ class IsImage extends Base
 					continue;
 				}
 
-				$detectedType = $mimeType;
-				break;
+				return $mimeType;
 			}
 		}
+
+		return null;
+	}
+
+	/**
+	 * Validates that the decoded data is actually a valid image.
+	 *
+	 * @param string $imageData
+	 * @return bool
+	 */
+	private function validateImageData( string $imageData ) : bool
+	{
+		// Use the extracted method to detect image type
+		$detectedType = $this->detectImageType( $imageData );
 
 		// Check for SVG separately with more strict validation
 		if( $detectedType === null && $this->allowSvg )
