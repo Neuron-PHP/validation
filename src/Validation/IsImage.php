@@ -81,11 +81,11 @@ class IsImage extends Base
 			return false;
 		}
 
-		$mimeType = $matches[1];
+		$mimeType = strtolower( $matches[1] ); // Normalize to lowercase per RFC 2045
 		$base64Data = $matches[2];
 
-		// Check MIME type
-		if( !empty( $this->allowedMimeTypes ) && !in_array( $mimeType, $this->allowedMimeTypes, true ) )
+		// Check MIME type (case-insensitive per RFC 2045)
+		if( !empty( $this->allowedMimeTypes ) && !$this->isMimeTypeAllowed( $mimeType ) )
 		{
 			return false;
 		}
@@ -181,12 +181,31 @@ class IsImage extends Base
 		}
 
 		// Check if detected type is in allowed MIME types
-		if( !empty( $this->allowedMimeTypes ) && !in_array( $detectedType, $this->allowedMimeTypes, true ) )
+		if( !empty( $this->allowedMimeTypes ) && !$this->isMimeTypeAllowed( $detectedType ) )
 		{
 			return false;
 		}
 
 		return true;
+	}
+
+	/**
+	 * Checks if a MIME type is in the allowed list (case-insensitive per RFC 2045).
+	 *
+	 * @param string $mimeType
+	 * @return bool
+	 */
+	private function isMimeTypeAllowed( string $mimeType ) : bool
+	{
+		$normalizedMimeType = strtolower( $mimeType );
+		foreach( $this->allowedMimeTypes as $allowed )
+		{
+			if( strtolower( $allowed ) === $normalizedMimeType )
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -201,23 +220,25 @@ class IsImage extends Base
 		// Only check first 1KB for performance
 		$dataToCheck = substr( $imageData, 0, 1024 );
 
-		// Remove any BOM (Byte Order Mark)
-		$dataToCheck = ltrim( $dataToCheck, "\xEF\xBB\xBF" );
-
-		// Case-insensitive check for <svg tag
-		// Must find an actual SVG element, not just XML declaration
-		if( preg_match( '/<svg\b[^>]*>/i', $dataToCheck ) )
+		// Remove UTF-8 BOM if present (exact 3-byte sequence)
+		if( substr( $dataToCheck, 0, 3 ) === "\xEF\xBB\xBF" )
 		{
-			// Require proper SVG namespace for stricter validation
-			// This helps avoid accepting malformed or potentially malicious SVG-like content
-			if( stripos( $dataToCheck, 'xmlns' ) !== false ||
-			    stripos( $dataToCheck, 'http://www.w3.org/2000/svg' ) !== false )
-			{
-				return 'image/svg+xml';
-			}
+			$dataToCheck = substr( $dataToCheck, 3 );
+		}
 
-			// No xmlns found - not a valid SVG document
-			return null;
+		// Case-insensitive check for <svg tag with proper namespace
+		// Must find an actual SVG element with namespace declaration
+		// This regex ensures xmlns is an attribute, not just text content
+		if( preg_match( '/<svg\b[^>]*xmlns\s*=\s*["\']http:\/\/www\.w3\.org\/2000\/svg["\'][^>]*>/i', $dataToCheck ) )
+		{
+			// Valid SVG with proper namespace declaration
+			return 'image/svg+xml';
+		}
+
+		// Also check for xmlns:svg pattern (less common but valid)
+		if( preg_match( '/<svg\b[^>]*xmlns:svg\s*=\s*["\']http:\/\/www\.w3\.org\/2000\/svg["\'][^>]*>/i', $dataToCheck ) )
+		{
+			return 'image/svg+xml';
 		}
 
 		return null;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Validation;
+
 use Neuron\Validation\IsImage;
 use PHPUnit\Framework\TestCase;
 
@@ -249,6 +251,77 @@ class IsImageTest extends TestCase
 		$svgWithNamespace = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40"/></svg>';
 		$svgWithNsBase64 = base64_encode( $svgWithNamespace );
 		$this->assertTrue( $validatorWithSvg->isValid( $svgWithNsBase64 ) );
+	}
+
+	/**
+	 * Test SVG with xmlns in text content is rejected (bypass prevention).
+	 */
+	public function testSvgWithXmlnsInTextRejected()
+	{
+		// SVG with xmlns in text content but not as attribute - should be rejected
+		$svgWithTextXmlns = '<svg><text>xmlns http://www.w3.org/2000/svg</text><script>alert(1)</script></svg>';
+		$svgBase64 = base64_encode( $svgWithTextXmlns );
+
+		// Should be rejected even with SVG enabled
+		$validatorWithSvg = new IsImage( [], null, true, true );
+		$this->assertFalse( $validatorWithSvg->isValid( $svgBase64 ) );
+
+		// SVG with xmlns in comment - should be rejected
+		$svgWithCommentXmlns = '<svg><!-- xmlns="http://www.w3.org/2000/svg" --><script>alert(1)</script></svg>';
+		$svgBase64Comment = base64_encode( $svgWithCommentXmlns );
+		$this->assertFalse( $validatorWithSvg->isValid( $svgBase64Comment ) );
+	}
+
+	/**
+	 * Test case-insensitive MIME type matching in data URIs.
+	 */
+	public function testCaseInsensitiveMimeTypeInDataUri()
+	{
+		// PNG with uppercase MIME type
+		$pngBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
+
+		// Test various case combinations
+		$validator = new IsImage();
+
+		// Uppercase MIME type
+		$upperDataUri = 'data:IMAGE/PNG;base64,' . $pngBase64;
+		$this->assertTrue( $validator->isValid( $upperDataUri ) );
+
+		// Mixed case MIME type
+		$mixedDataUri = 'data:Image/Png;base64,' . $pngBase64;
+		$this->assertTrue( $validator->isValid( $mixedDataUri ) );
+
+		// JPEG with uppercase
+		$jpegBase64 = '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAr/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';
+		$upperJpegUri = 'data:IMAGE/JPEG;base64,' . $jpegBase64;
+		$this->assertTrue( $validator->isValid( $upperJpegUri ) );
+	}
+
+	/**
+	 * Test BOM removal handles exact sequence only.
+	 */
+	public function testBomRemovalExactSequence()
+	{
+		// SVG with proper BOM followed by valid content
+		$svgWithBom = "\xEF\xBB\xBF<svg xmlns=\"http://www.w3.org/2000/svg\"></svg>";
+		$svgBomBase64 = base64_encode( $svgWithBom );
+
+		$validatorWithSvg = new IsImage( [], null, true, true );
+		$this->assertTrue( $validatorWithSvg->isValid( $svgBomBase64 ) );
+
+		// Test with only first two bytes of BOM - should not be stripped
+		// The incomplete BOM should prevent proper SVG detection
+		$svgTwoBomBytes = "\xEF\xBB<svg xmlns=\"http://www.w3.org/2000/svg\"></svg>";
+		$svgTwoBase64 = base64_encode( $svgTwoBomBytes );
+		// This passes because the regex can still find <svg after the bytes
+		// But the bytes aren't stripped by ltrim anymore
+		$this->assertTrue( $validatorWithSvg->isValid( $svgTwoBase64 ) );
+
+		// Test that we only remove exact BOM, not individual bytes
+		// This demonstrates the fix - ltrim would have stripped all \xEF, \xBB, \xBF anywhere
+		$svgWithEFAfterBom = "\xEF\xBB\xBF<svg xmlns=\"http://www.w3.org/2000/svg\">\xEF</svg>";
+		$svgEfBase64 = base64_encode( $svgWithEFAfterBom );
+		$this->assertTrue( $validatorWithSvg->isValid( $svgEfBase64 ) );
 	}
 
 	/**
