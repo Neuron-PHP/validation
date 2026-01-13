@@ -233,6 +233,25 @@ class IsImageTest extends TestCase
 	}
 
 	/**
+	 * Test SVG without xmlns namespace is rejected for security.
+	 */
+	public function testSvgWithoutXmlnsRejected()
+	{
+		// SVG without xmlns namespace - should be rejected even with SVG allowed
+		$svgNoNamespace = '<svg width="100" height="100"><circle cx="50" cy="50" r="40"/></svg>';
+		$svgBase64 = base64_encode( $svgNoNamespace );
+
+		// Even with SVG enabled, should reject SVG without proper namespace
+		$validatorWithSvg = new IsImage( [], null, true, true );
+		$this->assertFalse( $validatorWithSvg->isValid( $svgBase64 ) );
+
+		// SVG with xmlns should pass
+		$svgWithNamespace = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40"/></svg>';
+		$svgWithNsBase64 = base64_encode( $svgWithNamespace );
+		$this->assertTrue( $validatorWithSvg->isValid( $svgWithNsBase64 ) );
+	}
+
+	/**
 	 * Test malformed data URI.
 	 */
 	public function testMalformedDataUri()

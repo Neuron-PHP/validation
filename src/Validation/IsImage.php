@@ -208,16 +208,16 @@ class IsImage extends Base
 		// Must find an actual SVG element, not just XML declaration
 		if( preg_match( '/<svg\b[^>]*>/i', $dataToCheck ) )
 		{
-			// Additional validation: check for xmlns attribute (standard in valid SVG)
+			// Require proper SVG namespace for stricter validation
+			// This helps avoid accepting malformed or potentially malicious SVG-like content
 			if( stripos( $dataToCheck, 'xmlns' ) !== false ||
 			    stripos( $dataToCheck, 'http://www.w3.org/2000/svg' ) !== false )
 			{
 				return 'image/svg+xml';
 			}
 
-			// Even without xmlns, if we have an svg tag, it's likely SVG
-			// But we're being more strict here for security
-			return 'image/svg+xml';
+			// No xmlns found - not a valid SVG document
+			return null;
 		}
 
 		return null;
