@@ -417,6 +417,33 @@ class IsImageTest extends TestCase
 	}
 
 	/**
+	 * Test SVG accepted when explicitly in allowedMimeTypes even with allowSvg=false.
+	 */
+	public function testSvgAcceptedWhenExplicitlyAllowed()
+	{
+		// SVG content
+		$svgContent = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40"/></svg>';
+		$svgBase64 = base64_encode( $svgContent );
+
+		// Validator with SVG explicitly in allowedMimeTypes but allowSvg=false
+		$validatorExplicitSvg = new IsImage( [ 'image/jpeg', 'image/svg+xml' ], null, true, false );
+
+		// SVG should pass because it's explicitly allowed in MIME types
+		$this->assertTrue( $validatorExplicitSvg->isValid( $svgBase64 ) );
+
+		// Data URI with SVG should also work
+		$svgDataUri = 'data:image/svg+xml;base64,' . $svgBase64;
+		$this->assertTrue( $validatorExplicitSvg->isValid( $svgDataUri ) );
+
+		// Validator without SVG in allowedMimeTypes and allowSvg=false
+		$validatorNoSvg = new IsImage( [ 'image/jpeg', 'image/png' ], null, true, false );
+
+		// SVG should fail
+		$this->assertFalse( $validatorNoSvg->isValid( $svgBase64 ) );
+		$this->assertFalse( $validatorNoSvg->isValid( $svgDataUri ) );
+	}
+
+	/**
 	 * Test malformed data URI.
 	 */
 	public function testMalformedDataUri()

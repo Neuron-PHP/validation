@@ -129,8 +129,11 @@ class IsImage extends Base
 			// Detect the image type from signatures
 			$detectedType = $this->detectImageType( $decoded );
 
-			// Check for SVG if allowed
-			if( $detectedType === null && $this->allowSvg )
+			// Check for SVG if:
+			// 1. allowSvg is true (general SVG support enabled), OR
+			// 2. 'image/svg+xml' is explicitly in allowedMimeTypes
+			$svgExplicitlyAllowed = $this->isMimeTypeAllowed( 'image/svg+xml' );
+			if( $detectedType === null && ( $this->allowSvg || $svgExplicitlyAllowed ) )
 			{
 				$detectedType = $this->detectSvg( $decoded );
 			}
@@ -210,8 +213,11 @@ class IsImage extends Base
 		// Use the extracted method to detect image type
 		$detectedType = $this->detectImageType( $imageData );
 
-		// Check for SVG separately with more strict validation
-		if( $detectedType === null && $this->allowSvg )
+		// Check for SVG if:
+		// 1. allowSvg is true (general SVG support enabled), OR
+		// 2. 'image/svg+xml' is explicitly in allowedMimeTypes (if any restrictions exist)
+		$svgExplicitlyAllowed = !empty( $this->allowedMimeTypes ) && $this->isMimeTypeAllowed( 'image/svg+xml' );
+		if( $detectedType === null && ( $this->allowSvg || $svgExplicitlyAllowed ) )
 		{
 			$detectedType = $this->detectSvg( $imageData );
 		}
