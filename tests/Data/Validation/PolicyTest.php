@@ -12,7 +12,14 @@ class PolicyTest extends \PHPUnit\Framework\TestCase
 
 	public function setUp() : void
 	{
-		$this->PolicyTraitObj = $this->getObjectForTrait( '\Neuron\Validation\Policy' );
+		$this->PolicyTraitObj = new class {
+			use \Neuron\Validation\Policy;
+
+			public function __construct()
+			{
+				$this->_rules = [];
+			}
+		};
 
 		$DateRange = new IsDateWithinRange( new DateRange( '2000-01-01', '2020-01-02') );
 
